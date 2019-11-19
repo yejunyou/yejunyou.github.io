@@ -228,6 +228,608 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/19/%E6%B1%87%E7%BC%96%E5%9F%BA%E7%A1%80-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/11/19/%E6%B1%87%E7%BC%96%E5%9F%BA%E7%A1%80-1/" itemprop="url">汇编基础-1</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-19T11:20:00+08:00">
+                2019-11-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="/.com//8086%E6%B1%87%E7%BC%96-1.png" alt="汇编基础"></p>
+<img src="https://upload-images.jianshu.io/upload_images/3183470-1133dda046eb9671.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" class="full-image">
+
+<p>汇编的知识点比较杂且多，为方便梳理，整理成思维导图：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/3183470-68ab1ad8539ed102.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="8086汇编.png"></p>
+<ul>
+<li>语言发展<ul>
+<li>机器语言</li>
+<li>汇编语言</li>
+<li>高级语言</li>
+</ul>
+</li>
+<li>编译与反编译的关系</li>
+<li>特点<ul>
+<li>直接访问、控制硬件</li>
+<li>和机器指令一一对应</li>
+<li>不区分大小写</li>
+</ul>
+</li>
+<li>分类<ul>
+<li>8086</li>
+<li>AT&amp;T（Mac、iOS模拟器）</li>
+<li>ARM（切入式、iOS设备）</li>
+<li>Win32/Win64</li>
+<li>…</li>
+</ul>
+</li>
+<li>总线<ul>
+<li>地址总线 AB：决定CPU的寻址能力</li>
+<li>数据总线 DB：决定CPU单次数据传送速度</li>
+<li>控制总线CB：决定对其他意见的控制种数</li>
+</ul>
+</li>
+<li>内存<ul>
+<li>内存单元都有唯一的物理地址</li>
+<li>8086的内存大小：<ul>
+<li>2^20 = 1M (0x00000~0xFFFFF)</li>
+<li>0x00000~0x9FFFF 主存地址空间（RAM）</li>
+<li>0xAFFFF~0xBFFFF 显存地址空间</li>
+<li>0xCFFFF~0xFFFFF 各种ROM地址空间（存储各种硬件/系统信息）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>寻址方式<ul>
+<li>8086有20位地址总线，但是16位结构的CPU</li>
+<li>内部用2个16位地址合成1个20位的物理地址 = 段地址 x 16 + 偏移地址</li>
+<li>内存的分段管理<ul>
+<li>目的：便于开发管理</li>
+<li>偏移地址最大16位，长度是64KB</li>
+<li>数据存在21F60H的2种描述方式：<ul>
+<li>数据存在内存2000：11F60单元</li>
+<li>数据存在内存2000H段中的1F60H单元中</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>寄存器<ul>
+<li>CPU典型构成<ul>
+<li>寄存器：信息储存</li>
+<li>运算器：信息处理</li>
+<li>控制器：控制其他器件工作</li>
+</ul>
+</li>
+<li>8086有14个寄存器<ul>
+<li>通用寄存器<ul>
+<li>数据寄存器<ul>
+<li>AX：AH + AL</li>
+<li>BX：BH + BL</li>
+<li>CX：CH + CL</li>
+<li>DX：DH + DL</li>
+</ul>
+</li>
+<li>指针寄存器<ul>
+<li>堆栈指针 SP</li>
+<li>基数指针 BP</li>
+</ul>
+</li>
+<li>变址寄存器<ul>
+<li>源变址 SI</li>
+<li>目的变址 DI</li>
+</ul>
+</li>
+<li>控制寄存器<ul>
+<li>指令指针 IP</li>
+<li>状态指针 FLAG</li>
+</ul>
+</li>
+<li>段寄存器<ul>
+<li>代码段 CS</li>
+<li>数据段 DS</li>
+<li>堆栈段 SS</li>
+<li>附加段 ES</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>都是16位，可以存放2个字节</li>
+<li>字与字节<ul>
+<li>字节：byte，1byte = 8bit</li>
+<li>字：word，1word = 2byte</li>
+</ul>
+</li>
+<li>段寄存器<ul>
+<li>CS：Code Segment</li>
+<li>DS：Data Segment</li>
+<li>SS：Stack Segment</li>
+<li>ES：Extra Segment</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>指令<ul>
+<li>CS和IP<ul>
+<li>CS为代码段寄存器，IP为指令指针寄存器，它们指示了CPU当前要读取指令的地址</li>
+<li>任意时刻，8086CPU都会将CS:IP指向的指令作为下一条需要取出执行的指令</li>
+<li>CPU根据什么区分指令和数据</li>
+</ul>
+</li>
+<li>jmp指令<ul>
+<li>统称转义指令</li>
+<li>格式:<ul>
+<li>jmp 段地址：偏移地址（jmp CS：IP）</li>
+<li>mov IP，ax</li>
+<li>jmp 0x00H</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>DS和[address]<ul>
+<li>读写内存单元时，写给内存单元的地址</li>
+<li>8086不支持直接将数据送入段寄存器（DS）</li>
+</ul>
+</li>
+<li>mov指令<ul>
+<li>mov 寄存器，数据</li>
+<li>mov 寄存器，寄存器</li>
+<li>mov 寄存器，内存单元</li>
+<li>mov 内存单元，寄存器</li>
+<li>mov 段寄存器，寄存器</li>
+<li>mov 寄存器，段寄存器</li>
+<li>不支持 mov 内存单元，内存单元</li>
+</ul>
+</li>
+<li>add和sub</li>
+</ul>
+</li>
+<li>栈<ul>
+<li>存储空间，LIFO</li>
+<li>SS作为栈段的段地址，任意时刻，SS：SP指向栈顶元素</li>
+<li>8086提供了POP和PUSH操作，8086中push和pop操作都是2个字节</li>
+<li>push ax操作过程：<ul>
+<li>sp = sp - 2</li>
+<li>把ax中的内容送入ss：sp指向的内存单元</li>
+</ul>
+</li>
+<li>pop ax操作过程<ul>
+<li>把ss：sp指向的内存单元送入到ax</li>
+<li>sp = sp+2</li>
+</ul>
+</li>
+<li>练习：<ul>
+<li>交换2个元素</li>
+<li>逆序复制</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>编写完整的汇编程序<ul>
+<li>汇编语言的组成<ul>
+<li>汇编指令：有对应的机器指令，被CPU执行</li>
+<li>伪指令：无对应的机器指令，不被CPU执行</li>
+</ul>
+</li>
+<li>注释以分号；开头</li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/19/%E6%B1%87%E7%BC%96%E5%9F%BA%E7%A1%80-8086/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/11/19/%E6%B1%87%E7%BC%96%E5%9F%BA%E7%A1%80-8086/" itemprop="url">汇编基础-8086</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-19T10:37:48+08:00">
+                2019-11-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="https://upload-images.jianshu.io/upload_images/3183470-1133dda046eb9671.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="helloworld.png"></p>
+<img src="https://upload-images.jianshu.io/upload_images/3183470-1133dda046eb9671.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" class="full-image">
+
+<p>汇编的知识点比较杂且多，为方便梳理，整理成思维导图：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/3183470-68ab1ad8539ed102.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="8086汇编.png"></p>
+<ul>
+<li>语言发展<ul>
+<li>机器语言</li>
+<li>汇编语言</li>
+<li>高级语言</li>
+</ul>
+</li>
+<li>编译与反编译的关系</li>
+<li>特点<ul>
+<li>直接访问、控制硬件</li>
+<li>和机器指令一一对应</li>
+<li>不区分大小写</li>
+</ul>
+</li>
+<li>分类<ul>
+<li>8086</li>
+<li>AT&amp;T（Mac、iOS模拟器）</li>
+<li>ARM（切入式、iOS设备）</li>
+<li>Win32/Win64</li>
+<li>…</li>
+</ul>
+</li>
+<li>总线<ul>
+<li>地址总线 AB：决定CPU的寻址能力</li>
+<li>数据总线 DB：决定CPU单次数据传送速度</li>
+<li>控制总线CB：决定对其他意见的控制种数</li>
+</ul>
+</li>
+<li>内存<ul>
+<li>内存单元都有唯一的物理地址</li>
+<li>8086的内存大小：<ul>
+<li>2^20 = 1M (0x00000~0xFFFFF)</li>
+<li>0x00000~0x9FFFF 主存地址空间（RAM）</li>
+<li>0xAFFFF~0xBFFFF 显存地址空间</li>
+<li>0xCFFFF~0xFFFFF 各种ROM地址空间（存储各种硬件/系统信息）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>寻址方式<ul>
+<li>8086有20位地址总线，但是16位结构的CPU</li>
+<li>内部用2个16位地址合成1个20位的物理地址 = 段地址 x 16 + 偏移地址</li>
+<li>内存的分段管理<ul>
+<li>目的：便于开发管理</li>
+<li>偏移地址最大16位，长度是64KB</li>
+<li>数据存在21F60H的2种描述方式：<ul>
+<li>数据存在内存2000：11F60单元</li>
+<li>数据存在内存2000H段中的1F60H单元中</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>寄存器<ul>
+<li>CPU典型构成<ul>
+<li>寄存器：信息储存</li>
+<li>运算器：信息处理</li>
+<li>控制器：控制其他器件工作</li>
+</ul>
+</li>
+<li>8086有14个寄存器<ul>
+<li>通用寄存器<ul>
+<li>数据寄存器<ul>
+<li>AX：AH + AL</li>
+<li>BX：BH + BL</li>
+<li>CX：CH + CL</li>
+<li>DX：DH + DL</li>
+</ul>
+</li>
+<li>指针寄存器<ul>
+<li>堆栈指针 SP</li>
+<li>基数指针 BP</li>
+</ul>
+</li>
+<li>变址寄存器<ul>
+<li>源变址 SI</li>
+<li>目的变址 DI</li>
+</ul>
+</li>
+<li>控制寄存器<ul>
+<li>指令指针 IP</li>
+<li>状态指针 FLAG</li>
+</ul>
+</li>
+<li>段寄存器<ul>
+<li>代码段 CS</li>
+<li>数据段 DS</li>
+<li>堆栈段 SS</li>
+<li>附加段 ES</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>都是16位，可以存放2个字节</li>
+<li>字与字节<ul>
+<li>字节：byte，1byte = 8bit</li>
+<li>字：word，1word = 2byte</li>
+</ul>
+</li>
+<li>段寄存器<ul>
+<li>CS：Code Segment</li>
+<li>DS：Data Segment</li>
+<li>SS：Stack Segment</li>
+<li>ES：Extra Segment</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>指令<ul>
+<li>CS和IP<ul>
+<li>CS为代码段寄存器，IP为指令指针寄存器，它们指示了CPU当前要读取指令的地址</li>
+<li>任意时刻，8086CPU都会将CS:IP指向的指令作为下一条需要取出执行的指令</li>
+<li>CPU根据什么区分指令和数据</li>
+</ul>
+</li>
+<li>jmp指令<ul>
+<li>统称转义指令</li>
+<li>格式:<ul>
+<li>jmp 段地址：偏移地址（jmp CS：IP）</li>
+<li>mov IP，ax</li>
+<li>jmp 0x00H</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>DS和[address]<ul>
+<li>读写内存单元时，写给内存单元的地址</li>
+<li>8086不支持直接将数据送入段寄存器（DS）</li>
+</ul>
+</li>
+<li>mov指令<ul>
+<li>mov 寄存器，数据</li>
+<li>mov 寄存器，寄存器</li>
+<li>mov 寄存器，内存单元</li>
+<li>mov 内存单元，寄存器</li>
+<li>mov 段寄存器，寄存器</li>
+<li>mov 寄存器，段寄存器</li>
+<li>不支持 mov 内存单元，内存单元</li>
+</ul>
+</li>
+<li>add和sub</li>
+</ul>
+</li>
+<li>栈<ul>
+<li>存储空间，LIFO</li>
+<li>SS作为栈段的段地址，任意时刻，SS：SP指向栈顶元素</li>
+<li>8086提供了POP和PUSH操作，8086中push和pop操作都是2个字节</li>
+<li>push ax操作过程：<ul>
+<li>sp = sp - 2</li>
+<li>把ax中的内容送入ss：sp指向的内存单元</li>
+</ul>
+</li>
+<li>pop ax操作过程<ul>
+<li>把ss：sp指向的内存单元送入到ax</li>
+<li>sp = sp+2</li>
+</ul>
+</li>
+<li>练习：<ul>
+<li>交换2个元素</li>
+<li>逆序复制</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>编写完整的汇编程序<ul>
+<li>汇编语言的组成<ul>
+<li>汇编指令：有对应的机器指令，被CPU执行</li>
+<li>伪指令：无对应的机器指令，不被CPU执行</li>
+</ul>
+</li>
+<li>注释以分号；开头</li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/18/hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -393,7 +995,7 @@
               
                 <a href="/archives/%20%7C%7C%20archive">
               
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -401,6 +1003,15 @@
 
             
 
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
             
 
           </nav>

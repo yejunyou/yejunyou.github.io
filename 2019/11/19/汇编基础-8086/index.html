@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="汇编," />
 
 
 
@@ -79,15 +79,20 @@
 
 
 
-<meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="description" content="汇编的知识点比较杂且多，为方便梳理，整理成思维导图：   语言发展 机器语言 汇编语言 高级语言   编译与反编译的关系 特点 直接访问、控制硬件 和机器指令一一对应 不区分大小写   分类 8086 AT&amp;amp;T（Mac、iOS模拟器） ARM（切入式、iOS设备） Win32&#x2F;Win64 …   总线 地址总线 AB：决定CPU的寻址能力 数据总线 DB：决定CPU单次数据传送速度">
+<meta name="keywords" content="汇编">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;18&#x2F;hello-world&#x2F;index.html">
+<meta property="og:title" content="汇编基础-8086">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;19&#x2F;%E6%B1%87%E7%BC%96%E5%9F%BA%E7%A1%80-8086&#x2F;index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="汇编的知识点比较杂且多，为方便梳理，整理成思维导图：   语言发展 机器语言 汇编语言 高级语言   编译与反编译的关系 特点 直接访问、控制硬件 和机器指令一一对应 不区分大小写   分类 8086 AT&amp;amp;T（Mac、iOS模拟器） ARM（切入式、iOS设备） Win32&#x2F;Win64 …   总线 地址总线 AB：决定CPU的寻址能力 数据总线 DB：决定CPU单次数据传送速度">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-18T12:28:00.032Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;upload-images.jianshu.io&#x2F;upload_images&#x2F;3183470-1133dda046eb9671.png?imageMogr2&#x2F;auto-orient&#x2F;strip%7CimageView2&#x2F;2&#x2F;w&#x2F;1240">
+<meta property="og:image" content="https:&#x2F;&#x2F;upload-images.jianshu.io&#x2F;upload_images&#x2F;3183470-1133dda046eb9671.png?imageMogr2&#x2F;auto-orient&#x2F;strip%7CimageView2&#x2F;2&#x2F;w&#x2F;1240">
+<meta property="og:image" content="https:&#x2F;&#x2F;upload-images.jianshu.io&#x2F;upload_images&#x2F;3183470-68ab1ad8539ed102.png?imageMogr2&#x2F;auto-orient&#x2F;strip%7CimageView2&#x2F;2&#x2F;w&#x2F;1240">
+<meta property="og:updated_time" content="2019-11-19T03:20:17.393Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;upload-images.jianshu.io&#x2F;upload_images&#x2F;3183470-1133dda046eb9671.png?imageMogr2&#x2F;auto-orient&#x2F;strip%7CimageView2&#x2F;2&#x2F;w&#x2F;1240">
 
 
 
@@ -117,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/11/18/hello-world/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/11/19/汇编基础-8086/"/>
 
 
 
 
 
-  <title>Hello World | Hexo</title>
+  <title>汇编基础-8086 | Hexo</title>
   
 
 
@@ -230,7 +235,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/18/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/19/%E6%B1%87%E7%BC%96%E5%9F%BA%E7%A1%80-8086/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -247,7 +252,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hello World</h1>
+          <h1 class="post-title" itemprop="name headline">汇编基础-8086</h1>
         
 
         <div class="post-meta">
@@ -259,8 +264,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-18T20:28:00+08:00">
-                2019-11-18
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-19T10:37:48+08:00">
+                2019-11-19
               </time>
             
 
@@ -297,19 +302,188 @@
       
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+        <p><img src="https://upload-images.jianshu.io/upload_images/3183470-1133dda046eb9671.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="helloworld.png"></p>
+<img src="https://upload-images.jianshu.io/upload_images/3183470-1133dda046eb9671.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" class="full-image">
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+<p>汇编的知识点比较杂且多，为方便梳理，整理成思维导图：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/3183470-68ab1ad8539ed102.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="8086汇编.png"></p>
+<ul>
+<li>语言发展<ul>
+<li>机器语言</li>
+<li>汇编语言</li>
+<li>高级语言</li>
+</ul>
+</li>
+<li>编译与反编译的关系</li>
+<li>特点<ul>
+<li>直接访问、控制硬件</li>
+<li>和机器指令一一对应</li>
+<li>不区分大小写</li>
+</ul>
+</li>
+<li>分类<ul>
+<li>8086</li>
+<li>AT&amp;T（Mac、iOS模拟器）</li>
+<li>ARM（切入式、iOS设备）</li>
+<li>Win32/Win64</li>
+<li>…</li>
+</ul>
+</li>
+<li>总线<ul>
+<li>地址总线 AB：决定CPU的寻址能力</li>
+<li>数据总线 DB：决定CPU单次数据传送速度</li>
+<li>控制总线CB：决定对其他意见的控制种数</li>
+</ul>
+</li>
+<li>内存<ul>
+<li>内存单元都有唯一的物理地址</li>
+<li>8086的内存大小：<ul>
+<li>2^20 = 1M (0x00000~0xFFFFF)</li>
+<li>0x00000~0x9FFFF 主存地址空间（RAM）</li>
+<li>0xAFFFF~0xBFFFF 显存地址空间</li>
+<li>0xCFFFF~0xFFFFF 各种ROM地址空间（存储各种硬件/系统信息）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>寻址方式<ul>
+<li>8086有20位地址总线，但是16位结构的CPU</li>
+<li>内部用2个16位地址合成1个20位的物理地址 = 段地址 x 16 + 偏移地址</li>
+<li>内存的分段管理<ul>
+<li>目的：便于开发管理</li>
+<li>偏移地址最大16位，长度是64KB</li>
+<li>数据存在21F60H的2种描述方式：<ul>
+<li>数据存在内存2000：11F60单元</li>
+<li>数据存在内存2000H段中的1F60H单元中</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>寄存器<ul>
+<li>CPU典型构成<ul>
+<li>寄存器：信息储存</li>
+<li>运算器：信息处理</li>
+<li>控制器：控制其他器件工作</li>
+</ul>
+</li>
+<li>8086有14个寄存器<ul>
+<li>通用寄存器<ul>
+<li>数据寄存器<ul>
+<li>AX：AH + AL</li>
+<li>BX：BH + BL</li>
+<li>CX：CH + CL</li>
+<li>DX：DH + DL</li>
+</ul>
+</li>
+<li>指针寄存器<ul>
+<li>堆栈指针 SP</li>
+<li>基数指针 BP</li>
+</ul>
+</li>
+<li>变址寄存器<ul>
+<li>源变址 SI</li>
+<li>目的变址 DI</li>
+</ul>
+</li>
+<li>控制寄存器<ul>
+<li>指令指针 IP</li>
+<li>状态指针 FLAG</li>
+</ul>
+</li>
+<li>段寄存器<ul>
+<li>代码段 CS</li>
+<li>数据段 DS</li>
+<li>堆栈段 SS</li>
+<li>附加段 ES</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>都是16位，可以存放2个字节</li>
+<li>字与字节<ul>
+<li>字节：byte，1byte = 8bit</li>
+<li>字：word，1word = 2byte</li>
+</ul>
+</li>
+<li>段寄存器<ul>
+<li>CS：Code Segment</li>
+<li>DS：Data Segment</li>
+<li>SS：Stack Segment</li>
+<li>ES：Extra Segment</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>指令<ul>
+<li>CS和IP<ul>
+<li>CS为代码段寄存器，IP为指令指针寄存器，它们指示了CPU当前要读取指令的地址</li>
+<li>任意时刻，8086CPU都会将CS:IP指向的指令作为下一条需要取出执行的指令</li>
+<li>CPU根据什么区分指令和数据</li>
+</ul>
+</li>
+<li>jmp指令<ul>
+<li>统称转义指令</li>
+<li>格式:<ul>
+<li>jmp 段地址：偏移地址（jmp CS：IP）</li>
+<li>mov IP，ax</li>
+<li>jmp 0x00H</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>DS和[address]<ul>
+<li>读写内存单元时，写给内存单元的地址</li>
+<li>8086不支持直接将数据送入段寄存器（DS）</li>
+</ul>
+</li>
+<li>mov指令<ul>
+<li>mov 寄存器，数据</li>
+<li>mov 寄存器，寄存器</li>
+<li>mov 寄存器，内存单元</li>
+<li>mov 内存单元，寄存器</li>
+<li>mov 段寄存器，寄存器</li>
+<li>mov 寄存器，段寄存器</li>
+<li>不支持 mov 内存单元，内存单元</li>
+</ul>
+</li>
+<li>add和sub</li>
+</ul>
+</li>
+<li>栈<ul>
+<li>存储空间，LIFO</li>
+<li>SS作为栈段的段地址，任意时刻，SS：SP指向栈顶元素</li>
+<li>8086提供了POP和PUSH操作，8086中push和pop操作都是2个字节</li>
+<li>push ax操作过程：<ul>
+<li>sp = sp - 2</li>
+<li>把ax中的内容送入ss：sp指向的内存单元</li>
+</ul>
+</li>
+<li>pop ax操作过程<ul>
+<li>把ss：sp指向的内存单元送入到ax</li>
+<li>sp = sp+2</li>
+</ul>
+</li>
+<li>练习：<ul>
+<li>交换2个元素</li>
+<li>逆序复制</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>编写完整的汇编程序<ul>
+<li>汇编语言的组成<ul>
+<li>汇编指令：有对应的机器指令，被CPU执行</li>
+<li>伪指令：无对应的机器指令，不被CPU执行</li>
+</ul>
+</li>
+<li>注释以分号；开头</li>
+</ul>
+</li>
+</ul>
 
       
     </div>
@@ -325,6 +499,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%B1%87%E7%BC%96/" rel="tag"># 汇编</a>
+          
+        </div>
+      
 
       
       
@@ -334,14 +514,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2019/11/18/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/11/19/%E6%B1%87%E7%BC%96%E5%9F%BA%E7%A1%80-8086/" rel="prev" title="汇编基础-8086">
-                汇编基础-8086 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/11/19/%E6%B1%87%E7%BC%96%E5%9F%BA%E7%A1%80-1/" rel="prev" title="汇编基础-1">
+                汇编基础-1 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -394,17 +578,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -455,22 +630,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
