@@ -84,11 +84,11 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="汇编基础-2">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;19&#x2F;%E6%B1%87%E7%BC%96%E5%9F%BA%E7%A1%80-2&#x2F;index.html">
-<meta property="og:site_name" content="you1024">
+<meta property="og:site_name" content="YoU1024">
 <meta property="og:description" content="中断 概念： 软件或者硬件的信号，使得CPU暂停当前任务，去执行另一段子程序 本质是一种电信号，中断控制器把电信号发送给处理器的特定引脚，处理器暂停当前任务，跳转到中断处理程序的入口点处理中断">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;19&#x2F;%E6%B1%87%E7%BC%96%E5%9F%BA%E7%A1%80-2&#x2F;8086%E6%B1%87%E7%BC%96%E5%9F%BA%E7%A1%802.png">
-<meta property="og:updated_time" content="2019-11-19T08:09:48.204Z">
+<meta property="og:updated_time" content="2019-11-22T22:49:50.328Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;19&#x2F;%E6%B1%87%E7%BC%96%E5%9F%BA%E7%A1%80-2&#x2F;8086%E6%B1%87%E7%BC%96%E5%9F%BA%E7%A1%802.png">
 
@@ -126,7 +126,7 @@
 
 
 
-  <title>汇编基础-2 | you1024</title>
+  <title>汇编基础-2 | YoU1024</title>
   
 
 
@@ -156,7 +156,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">you1024</span>
+        <span class="site-title">YoU1024</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -236,13 +236,13 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/19/%E6%B1%87%E7%BC%96%E5%9F%BA%E7%A1%80-2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="you1024">
+      <meta itemprop="name" content="YoU1024">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="you1024">
+      <meta itemprop="name" content="YoU1024">
     </span>
 
     
@@ -301,8 +301,7 @@
 
       
         <p><img src="/2019/11/19/%E6%B1%87%E7%BC%96%E5%9F%BA%E7%A1%80-2/8086%E6%B1%87%E7%BC%96%E5%9F%BA%E7%A1%802.png" alt="汇编基础-2"></p>
-<ul>
-<li>中断<ul>
+<h1 id="中断"><a href="#中断" class="headerlink" title="中断"></a>中断</h1><ul>
 <li>概念：<ul>
 <li>软件或者硬件的信号，使得CPU暂停当前任务，去执行另一段子程序</li>
 <li>本质是一种电信号，中断控制器把电信号发送给处理器的特定引脚，处理器暂停当前任务，跳转到中断处理程序的入口点处理中断<a id="more"></a></li>
@@ -322,8 +321,7 @@
 </ul>
 </li>
 </ul>
-</li>
-<li>loop指令<ul>
+<h1 id="loop指令"><a href="#loop指令" class="headerlink" title="loop指令"></a>loop指令</h1><ul>
 <li>loop和cx配合使用，用于执行循环操作</li>
 <li>格式：<ul>
 <li>mov cx，循环次数</li>
@@ -336,10 +334,9 @@
 <li>判断cx的值，大于零继续执行标号的程序</li>
 </ul>
 </li>
-<li>练习：循环求和</li>
+<li>ex：循环求和</li>
 </ul>
-</li>
-<li>寻址方式<ul>
+<h1 id="寻址方式"><a href="#寻址方式" class="headerlink" title="寻址方式"></a>寻址方式</h1><ul>
 <li>直接寻址<ul>
 <li>[idata]</li>
 </ul>
@@ -364,8 +361,7 @@
 </ul>
 </li>
 </ul>
-</li>
-<li>call和ret指令<ul>
+<h1 id="call和ret指令"><a href="#call和ret指令" class="headerlink" title="call和ret指令"></a>call和ret指令</h1><ul>
 <li>call 标号：<ul>
 <li>将下一条指令的偏移地址入栈后，转到标号处执行指令</li>
 </ul>
@@ -381,8 +377,7 @@
 </ul>
 </li>
 </ul>
-</li>
-<li>栈幁（Stack Frame Layout）<ul>
+<h1 id="栈幁（Stack-Frame-Layout）"><a href="#栈幁（Stack-Frame-Layout）" class="headerlink" title="栈幁（Stack Frame Layout）"></a>栈幁（Stack Frame Layout）</h1><ul>
 <li>函数执行的环境，包括参数、局部变量、返回地址等</li>
 <li>栈幁的增长方向：低地址方向（无限递归的尽头）</li>
 <li>完整的函数调用流程：<ul>
@@ -396,8 +391,6 @@
 <li>3-push bp；保留bp的当前值，执行完后还要返回这个值指向的地址</li>
 <li>2-调用call，push函数返回地址；也就是下一条指令</li>
 <li>1-push参数</li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -495,13 +488,22 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <p class="site-author-name" itemprop="name">you1024</p>
-              <p class="site-description motion-element" itemprop="description">勇士低语/我就是暴风雨</p>
+              <p class="site-author-name" itemprop="name">YoU1024</p>
+              <p class="site-description motion-element" itemprop="description">命运对勇士说/暴风雨要来了/勇士低语/我就是暴风雨</p>
           </div>
 
           <nav class="site-state motion-element">
@@ -511,7 +513,7 @@
               
                 <a href="/archives/%20%7C%7C%20archive">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -524,7 +526,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
@@ -548,6 +550,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#中断"><span class="nav-number">1.</span> <span class="nav-text">中断</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#loop指令"><span class="nav-number">2.</span> <span class="nav-text">loop指令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#寻址方式"><span class="nav-number">3.</span> <span class="nav-text">寻址方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#call和ret指令"><span class="nav-number">4.</span> <span class="nav-text">call和ret指令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#栈幁（Stack-Frame-Layout）"><span class="nav-number">5.</span> <span class="nav-text">栈幁（Stack Frame Layout）</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -565,7 +583,7 @@
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">you1024</span>
+  <span class="author" itemprop="copyrightHolder">YoU1024</span>
 
   
 </div>

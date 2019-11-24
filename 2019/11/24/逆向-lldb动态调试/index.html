@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="逆向," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="动态调试动态调试可以再程序运行起来以后，通过打断点、打印的方式，查看参数、返回值、函数调用流程">
+<meta name="keywords" content="逆向">
+<meta property="og:type" content="article">
+<meta property="og:title" content="逆向-lldb动态调试">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;24&#x2F;%E9%80%86%E5%90%91-lldb%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95&#x2F;index.html">
+<meta property="og:site_name" content="YoU1024">
+<meta property="og:description" content="动态调试动态调试可以再程序运行起来以后，通过打断点、打印的方式，查看参数、返回值、函数调用流程">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;24&#x2F;%E9%80%86%E5%90%91-lldb%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95&#x2F;xcodedebugserver.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;24&#x2F;%E9%80%86%E5%90%91-lldb%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95&#x2F;anydebugserver.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;24&#x2F;%E9%80%86%E5%90%91-lldb%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95&#x2F;serverlist.png">
+<meta property="og:updated_time" content="2019-11-24T07:34:23.208Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;24&#x2F;%E9%80%86%E5%90%91-lldb%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95&#x2F;xcodedebugserver.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/11/24/逆向-lldb动态调试/"/>
+
+
+
+
+
+  <title>逆向-lldb动态调试 | YoU1024</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">YoU1024</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">严肃、活泼、团结、紧张</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/24/%E9%80%86%E5%90%91-lldb%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YoU1024">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YoU1024">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">逆向-lldb动态调试</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-24T15:29:08+08:00">
+                2019-11-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="动态调试"><a href="#动态调试" class="headerlink" title="动态调试"></a>动态调试</h1><p>动态调试可以再程序运行起来以后，通过打断点、打印的方式，查看参数、返回值、函数调用流程</p>
+<a id="more"></a>
+<p>其原理如下。</p>
+<p><img src="/2019/11/24/%E9%80%86%E5%90%91-lldb%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95/xcodedebugserver.png" alt></p>
+<p>Xcode的编译器发展经历了从GCC到LLVM的历程，调试器经历了从GDB到LLDB的历程。目前我们接触的是Xcode的LLDB和手机里的<code>debugserver</code>。<code>debugserver</code>是一开始就存放在Xcode里面的，路径：<code>Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/De viceSupport/9.1/DeveloperDiskImage.dmg/usr/bin/debugserver</code>。当Xcode识别出手机设备后，自动安装debugserver到手机里。这也意味着，只能调试通过Xcode安装的app。</p>
+<p>当我们想要动态调试任意app，可以通过终端的方式交互，如图：</p>
+<p><img src="/2019/11/24/%E9%80%86%E5%90%91-lldb%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95/anydebugserver.png" alt></p>
+<p>首先解决<code>debugserver</code>的权限问题。默认情况下，<code>/Developer/usr/bin/debugserver</code>只认可Xcode安装的app。这里需要给<code>debugserver</code>重新签名，添加2个调试相关的权限：<code>get-task-allow</code>和<code>task_for_pid_allow</code></p>
+<h5 id="debugserver重签名"><a href="#debugserver重签名" class="headerlink" title="debugserver重签名"></a>debugserver重签名</h5><p>iPhone的/Developer目录是只读的，无法直接对/Developer/usr/bin/debugserver文件签名，需要先把debugserver拷贝到Mac，通过ldid命令导出文件之前的签名权限</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ldid -e debugserver &gt; debugserver.entitlements</span><br></pre></td></tr></table></figure>
+<p>添加上面提到的2个权限：<br><img src="/2019/11/24/%E9%80%86%E5%90%91-lldb%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95/serverlist.png" alt></p>
+<p>重新签名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ldid -S debugserver.entitlements debugserver</span><br></pre></td></tr></table></figure>
+<p>然后把签好权限的debugserver放到/usr/bin目录，便于查找debugserver指令</p>
+<h5 id="权限签名方式二"><a href="#权限签名方式二" class="headerlink" title="权限签名方式二"></a>权限签名方式二</h5><p>也可以使用codesign</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 查看权限信息</span><br><span class="line">$ codesign -d --entitlements - debugserver</span><br><span class="line"></span><br><span class="line"># 签名权限</span><br><span class="line">$ codesign -f -s - --entitlements debugserver.entitlements debugserver</span><br><span class="line"># 签名权限的简写</span><br><span class="line">$ codesign -fs- --entitlements debugserver.entitlements debugserver</span><br></pre></td></tr></table></figure>
+
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>手机端：使debugserver附加到目标app进程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ debugserver *:&lt;port&gt; -a 进程</span><br><span class="line"></span><br><span class="line">// *:&lt;port&gt;</span><br><span class="line">// 使用iPhone的端口启动debugserver服务（注意不能是保留端口号）</span><br><span class="line">// -a 进程</span><br><span class="line">// 可以是进程ID、进程名称</span><br></pre></td></tr></table></figure>
+
+<p>Mac端：启动lldb，远程连接iPhone的debugserver服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ lldb</span><br><span class="line">(lldb)</span><br><span class="line">$ (lldb) process connect connect://手机ip地址:debugserver服务端口号</span><br><span class="line">$ (lldb) c // 让程序先跑起来</span><br></pre></td></tr></table></figure>
+
+<p>也可以直接通过debugserver启动app</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ debugserer -x auto *:端口号 app可执行文件路径</span><br></pre></td></tr></table></figure>
+<p>接下来到lldb指令上场</p>
+<h1 id="常用lldb指令"><a href="#常用lldb指令" class="headerlink" title="常用lldb指令"></a>常用lldb指令</h1><h2 id="表达式"><a href="#表达式" class="headerlink" title="表达式"></a>表达式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">express</span><br><span class="line">express -O --</span><br><span class="line">p</span><br><span class="line">print</span><br><span class="line">call</span><br></pre></td></tr></table></figure>
+
+<h2 id="线程、调用栈"><a href="#线程、调用栈" class="headerlink" title="线程、调用栈"></a>线程、调用栈</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//调用栈【当前线程、断点理由、断点文件+所在行数、调用栈】</span><br><span class="line">$ thread backtrace</span><br><span class="line">* thread #1, queue = &apos;com.apple.main-thread&apos;, stop reason = breakpoint 3.1</span><br><span class="line">  * frame #0: 0x000000010a2b5596 lldb动态调试`test at ViewController.m:21:17</span><br><span class="line">    frame #1: 0x000000010a2b566d lldb动态调试`-[ViewController touchesBegan:withEvent:](self=0x00007ffd5bc18fa0, _cmd=&quot;touchesBegan:withEvent:&quot;, touches=1 element, event=0x00006000004997a0) at ViewController.m:33:5</span><br><span class="line">    frame #2: 0x000000010e37fa09 UIKitCore`forwardTouchMethod + 353</span><br><span class="line">    ...</span><br><span class="line">    </span><br><span class="line">$ bt</span><br><span class="line">$ thread return</span><br><span class="line">$ frame variable</span><br></pre></td></tr></table></figure>
+
+<h2 id="断点调试"><a href="#断点调试" class="headerlink" title="断点调试"></a>断点调试</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">// 继续执行</span><br><span class="line">$ thread continue</span><br><span class="line">$ 􏰁continue</span><br><span class="line">$ c  </span><br><span class="line"></span><br><span class="line">遇到子函数当做一步执行</span><br><span class="line">$ thread step-over</span><br><span class="line">$ next</span><br><span class="line">$ n</span><br><span class="line"></span><br><span class="line">遇到子函数会进去</span><br><span class="line">$ thread step-in</span><br><span class="line">$ step</span><br><span class="line">$ s</span><br><span class="line"></span><br><span class="line">执行剩下的代码，返回到函数调用的地方</span><br><span class="line">$ thread step-out</span><br><span class="line">$ finish</span><br></pre></td></tr></table></figure>
+
+<h2 id="设置断点"><a href="#设置断点" class="headerlink" title="设置断点"></a>设置断点</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">断点</span><br><span class="line">$ breakpoint set -a &lt;func address&gt;</span><br><span class="line">$ breakpoint set -n &lt;func name&gt;</span><br><span class="line">$ breakpoint list // show break point</span><br><span class="line">$ breakpoint delete &lt;number&gt;</span><br><span class="line">$ breakpoint enable &lt;number&gt;</span><br><span class="line">$ breakpoint disable &lt;number&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">p help</span><br><span class="line">p po print express call xxx</span><br><span class="line">express -O -- self</span><br><span class="line"></span><br><span class="line">// 函数调用栈</span><br><span class="line">thread backtrace</span><br><span class="line">bt</span><br><span class="line">thread return</span><br><span class="line"></span><br><span class="line">// 函数幁栈变量</span><br><span class="line">frame variable</span><br><span class="line">frame variable a</span><br><span class="line"></span><br><span class="line">// 单步调试</span><br><span class="line">step over</span><br><span class="line">step into</span><br><span class="line">step out</span><br><span class="line"></span><br><span class="line">thread continue、c // run continue</span><br><span class="line">thread step-over 、next、n</span><br><span class="line">thread step-in、setp、s// 单步运行，把函数当做整体一步执行完</span><br><span class="line">thread step-out、finish//执行完当前函数代码，返回到上一个函数</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// 设置断点</span><br><span class="line">breakpoint set -n &lt;funciont name&gt;</span><br><span class="line">// 查看</span><br><span class="line">breakpoint list</span><br><span class="line"></span><br><span class="line">// 动态添加你想要执行的指令</span><br><span class="line">breakpoint command add 2</span><br><span class="line">&gt;&gt; xxx // 你想要执行的命令</span><br><span class="line">&gt;&gt; xxx</span><br><span class="line">&gt;&gt;DONE</span><br><span class="line">// 列出你添加了的指令</span><br><span class="line">breakpoint command list 2</span><br></pre></td></tr></table></figure>
+
+<h2 id="内存断点"><a href="#内存断点" class="headerlink" title="内存断点"></a>内存断点</h2><p>在内存数据发生改变的时候触发</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">watchpoint set variable 变量</span><br><span class="line">watchpoint set variable self-&gt;age</span><br><span class="line"></span><br><span class="line">watchpoint set expression 地址</span><br><span class="line">watchpoint set expression &amp;(self-&gt;age)</span><br><span class="line"></span><br><span class="line">watchpoint list</span><br><span class="line">watchpoint disable  断点编号</span><br><span class="line">watchpoint enable   断点编号</span><br><span class="line">watchpoint delete   断点编号</span><br><span class="line">watchpoint command add  断点编号</span><br><span class="line">watchpoint command list 断点编号</span><br><span class="line">watchpoint command delete 断点编号</span><br></pre></td></tr></table></figure>
+
+<h5 id="image-lookup"><a href="#image-lookup" class="headerlink" title="image lookup"></a>image lookup</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">image lookup -t 类型：查找某个类型信息</span><br><span class="line">image lookup -a 地址：根据内存地址查找在模块中的位置</span><br><span class="line">image lookup -n 符号或者函数名：查找它们的位置</span><br></pre></td></tr></table></figure>
+<h5 id="image-list"><a href="#image-list" class="headerlink" title="image list"></a>image list</h5><p>列出所有加载的模块信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">image list -o -f</span><br><span class="line">//  打印模块的偏移地址、全路径</span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E9%80%86%E5%90%91/" rel="tag"># 逆向</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/24/%E9%80%86%E5%90%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%92%8C%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/" rel="next" title="逆向-环境配置和遇到的坑">
+                <i class="fa fa-chevron-left"></i> 逆向-环境配置和遇到的坑
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">YoU1024</p>
+              <p class="site-description motion-element" itemprop="description">命运对勇士说/暴风雨要来了/勇士低语/我就是暴风雨</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#动态调试"><span class="nav-number">1.</span> <span class="nav-text">动态调试</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#debugserver重签名"><span class="nav-number">1.0.0.0.1.</span> <span class="nav-text">debugserver重签名</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#权限签名方式二"><span class="nav-number">1.0.0.0.2.</span> <span class="nav-text">权限签名方式二</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用"><span class="nav-number">2.</span> <span class="nav-text">使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常用lldb指令"><span class="nav-number">3.</span> <span class="nav-text">常用lldb指令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#表达式"><span class="nav-number">3.1.</span> <span class="nav-text">表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程、调用栈"><span class="nav-number">3.2.</span> <span class="nav-text">线程、调用栈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#断点调试"><span class="nav-number">3.3.</span> <span class="nav-text">断点调试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置断点"><span class="nav-number">3.4.</span> <span class="nav-text">设置断点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存断点"><span class="nav-number">3.5.</span> <span class="nav-text">内存断点</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#image-lookup"><span class="nav-number">3.5.0.0.1.</span> <span class="nav-text">image lookup</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#image-list"><span class="nav-number">3.5.0.0.2.</span> <span class="nav-text">image list</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">YoU1024</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

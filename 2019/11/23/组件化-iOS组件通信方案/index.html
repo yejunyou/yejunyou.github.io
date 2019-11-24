@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="组件化," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="业务模块化架构设计，可以达到明确模块职责及边界，提升代码质量，减少复杂依赖，优化编译速度，提升开发效率等效果 设计模式 vs 架构设计App 架构设计更多强调的是分层，基于设计模式六大原则之一的单一职责原则，将系统划分为基础层，网络层，UI层等等，以便于维护和扩展. 设计模式的范畴比架构设计小，强调的是类与类之间的关系。而架构可大可小，小到类之间的关系、大到模块之间、CS之间的设计。 !&amp;lt;–">
+<meta name="keywords" content="组件化">
+<meta property="og:type" content="article">
+<meta property="og:title" content="组件化-iOS组件通信方案">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;23&#x2F;%E7%BB%84%E4%BB%B6%E5%8C%96-iOS%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1%E6%96%B9%E6%A1%88&#x2F;index.html">
+<meta property="og:site_name" content="YoU1024">
+<meta property="og:description" content="业务模块化架构设计，可以达到明确模块职责及边界，提升代码质量，减少复杂依赖，优化编译速度，提升开发效率等效果 设计模式 vs 架构设计App 架构设计更多强调的是分层，基于设计模式六大原则之一的单一职责原则，将系统划分为基础层，网络层，UI层等等，以便于维护和扩展. 设计模式的范畴比架构设计小，强调的是类与类之间的关系。而架构可大可小，小到类之间的关系、大到模块之间、CS之间的设计。 !&amp;lt;–">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;23&#x2F;%E7%BB%84%E4%BB%B6%E5%8C%96-iOS%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1%E6%96%B9%E6%A1%88&#x2F;%E6%9E%B6%E6%9E%84%E5%88%86%E5%B1%82%E8%AE%BE%E8%AE%A1yy.png">
+<meta property="og:updated_time" content="2019-11-23T09:40:25.646Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;23&#x2F;%E7%BB%84%E4%BB%B6%E5%8C%96-iOS%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1%E6%96%B9%E6%A1%88&#x2F;%E6%9E%B6%E6%9E%84%E5%88%86%E5%B1%82%E8%AE%BE%E8%AE%A1yy.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/11/23/组件化-iOS组件通信方案/"/>
+
+
+
+
+
+  <title>组件化-iOS组件通信方案 | YoU1024</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">YoU1024</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">严肃、活泼、团结、紧张</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/23/%E7%BB%84%E4%BB%B6%E5%8C%96-iOS%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1%E6%96%B9%E6%A1%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YoU1024">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YoU1024">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">组件化-iOS组件通信方案</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-23T17:34:36+08:00">
+                2019-11-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>业务模块化架构设计，可以达到明确模块职责及边界，提升代码质量，减少复杂依赖，优化编译速度，提升开发效率等效果</p>
+<h6 id="设计模式-vs-架构设计"><a href="#设计模式-vs-架构设计" class="headerlink" title="设计模式 vs 架构设计"></a>设计模式 vs 架构设计</h6><p>App 架构设计更多强调的是分层，基于设计模式六大原则之一的单一职责原则，将系统划分为基础层，网络层，UI层等等，以便于维护和扩展.</p>
+<p>设计模式的范畴比架构设计小，强调的是类与类之间的关系。<br>而架构可大可小，小到类之间的关系、大到模块之间、CS之间的设计。</p>
+<p>!&lt;–more–&gt;</p>
+<h1 id="1-架构分层设计"><a href="#1-架构分层设计" class="headerlink" title="1. 架构分层设计"></a>1. 架构分层设计</h1><p><img src="/2019/11/23/%E7%BB%84%E4%BB%B6%E5%8C%96-iOS%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1%E6%96%B9%E6%A1%88/%E6%9E%B6%E6%9E%84%E5%88%86%E5%B1%82%E8%AE%BE%E8%AE%A1yy.png" alt></p>
+<ul>
+<li>基础层：<ul>
+<li>这里放一些基础的、与业务无关的公共组件，尽量用第三方的通用组件。</li>
+</ul>
+</li>
+<li>基础业务层：<ul>
+<li>这里放一些基础能力支撑的库。基于这一层，上层的业务组件可以⽅便地开发⾃己的组件。</li>
+<li>注: 需要注意，这里只提供基础能力支持，不提供界面UI相关的功能。另外，被多个业务组件使 ⽤的基础业务组件才放这里。</li>
+</ul>
+</li>
+<li>框架层:<ul>
+<li>这里提供组件管理、路由管理功能。通过框架层，用户可以对基础业务组件、业务组件进行拼装、组合。框架层提供工程模板，通过简单的配置，即可生成一个壳工程，并加入⾃己的业务。</li>
+<li>框架层还提供<code>JSBridge</code>功能，并设计支持<code>weex</code>、<code>flutter</code>等运行框架。</li>
+<li>框架层会放入平台所有组件的索引Spec。为了使用所有这些组件，Podfile中放入:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source &apos;http://company.com/example/YYFramework/Specs.git&apos;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>业务层<ul>
+<li>业务层放独立的业务组件。业务组件之间通过框架层进行通信。</li>
+<li>注: 基础层可以直接由上层调用。业务层和基础业务层的调用，都要通过框架层的组件管理进⾏通信。不允许直接调用业务层、基础业务层内的组件。</li>
+</ul>
+</li>
+</ul>
+<p>各层对应的git仓库分组:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">基础层     http://company.com/example/groups/YYBase</span><br><span class="line">基础业务层  http://company.com/example/groups/YYBaseService</span><br><span class="line">框架层     http://company.com/example/groups/YYFramework</span><br><span class="line">业务层     http://company.com/example/groups/YYService</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-组件通信"><a href="#2-组件通信" class="headerlink" title="2. 组件通信"></a>2. 组件通信</h1><p>除了基础层可以直接调用外，以上层的组件间调用，需要经过组件管理、或组件路由。</p>
+<p><code>YYModule</code> 是实现iOS组件化的一套库。 主要包含两部分内容:</p>
+<ul>
+<li><code>YYModuleManager</code><ul>
+<li>基于<code>protocol</code>，使⽤接⼝注册的方式，实现组件间解耦，是主要的组件化方案。</li>
+</ul>
+</li>
+<li><code>YYRouter</code><ul>
+<li>添加url路由支持，主要用于app间的调用、web跳转、通知跳转等场景，作为对基于<code>protocol</code>的组件化方案的补充。</li>
+</ul>
+</li>
+</ul>
+<p><code>YYRouter</code> 基于<code>MGJRouter</code> ，做了了如下改动:</p>
+<ol>
+<li>去掉了 <code>objectForURL</code> 相关方法，统一调用方式。</li>
+<li>路由处理流程中添加了<code>interceptor</code>，⽀持灵活地定制、处理路由。</li>
+</ol>
+<h1 id="3-使用"><a href="#3-使用" class="headerlink" title="3. 使用"></a>3. 使用</h1><h6 id="YYModuleManager"><a href="#YYModuleManager" class="headerlink" title="YYModuleManager"></a>YYModuleManager</h6><p><code>YYModuleManager</code> 的使⽤非常简单。<br>业务服务⽅提供<code>protocol</code>定义和实现类。</p>
+<h6 id="protocol"><a href="#protocol" class="headerlink" title="protocol"></a>protocol</h6><p>ex：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@protocol DemoModuleProtocol &lt;YYModuleProtocol&gt;</span><br><span class="line">- (id)loadData:(NSString *)key;</span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+
+<p>注: 业务方只提供<code>protocol</code>定义，实际由平台方写入到公共的 <code>YYPublicProtocols.h</code>⽂件中。</p>
+<h6 id="实现类"><a href="#实现类" class="headerlink" title="实现类"></a>实现类</h6><p>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#import &quot;YYPublicProtocols.h&quot;</span><br><span class="line">@interface DemoModuleImpl : NSObject&lt;DemoModuleProtocol&gt;</span><br><span class="line">@end</span><br><span class="line">@implementation DemoModuleImpl</span><br><span class="line">- (id)loadData:(NSString *)key &#123;</span><br><span class="line">    return @&#123;@&quot;key&quot;: key&#125;;</span><br><span class="line">&#125;</span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<p>服务方需要把实现类名也提供给平台方。</p>
+<h6 id="平台⽅"><a href="#平台⽅" class="headerlink" title="平台⽅"></a>平台⽅</h6><p>平台方根据业务提供的<code>protocol</code>，写⼊ <code>YYPublicProtocols.h</code>中，让⼤家都可以看到这个协议。 平台⽅需要注册接⼝和对应的实现类名，如:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[YYModuleManager registerClass:@&quot;DemoModuleImpl&quot; forProtocol:@protocol(DemoModuleProtocol)];</span><br></pre></td></tr></table></figure>
+<p>注册的实现可以在<code>- (BOOL)application: didFinishLaunchingWithOptions:</code>里完成。</p>
+<h6 id="调⽤⽅"><a href="#调⽤⽅" class="headerlink" title="调⽤⽅"></a>调⽤⽅</h6><p>调⽤方通过查找实现类，并调⽤。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 查找实现对象</span><br><span class="line">id&lt;DemoModuleProtocol&gt; impl = [YYModuleManager objectForProtocol:@protocol(DemoModuleProtocol)];</span><br><span class="line">// 使⽤</span><br><span class="line">[impl loadData:@&quot;aaa&quot;];</span><br></pre></td></tr></table></figure>
+
+<h4 id="YYRouter"><a href="#YYRouter" class="headerlink" title="YYRouter"></a>YYRouter</h4><p><code>Router</code>⽅案应只作为<code>protocol</code>方案的补充。只应用<code>于webview</code>、<code>app</code>间调用，通知处理等实在需要url的场景。</p>
+<p>基础⽤法</p>
+<ol>
+<li>注册<code>urlpattern</code>的回调<code>YYRouter</code></li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[YYRouter registerURLPattern:[NSString stringWithFormat:@&quot;mo://printUserInfo/:id&quot;] toHandler:^(NSDictionary *routerParameters) &#123;</span><br><span class="line">    NSLog(@&quot;id: %@&quot;, routerParameters[@&quot;id&quot;]);</span><br><span class="line">    return;</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
+
+<p>其中 <code>urlPattern</code>，采用和一般后台路由相似的语法，即<code>path</code>路路径中可以添加类似<code>:id</code>的通配，路径 中的参数，⾃动解析到 <code>routerParameters</code> 中的相关参数里了，如例子所示，如果传入,<br><code>mo://printUserInfo/1000</code> ，上⾯将打印:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id: 1000</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>调⽤方使用openURL触发</li>
+</ol>
+<h6 id="⾼级用法"><a href="#⾼级用法" class="headerlink" title="⾼级用法"></a>⾼级用法</h6><p>实际使用中，调⽤方使⽤ <code>openURL</code> 往往需要拿到数据、或进⾏界面跳转。如:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[YYRouter openURL: @&quot;mo://printUserInfo/1000&quot;];</span><br><span class="line"></span><br><span class="line">[YYRouter openURL:url completion:^(id result) &#123;</span><br><span class="line">    if ([result isKindOfClass:[UIViewController class]])  &#123;</span><br><span class="line">        [self.navigationController pushViewController:result animated:NO];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
+
+<p>如上代码，调⽤方希望调用完后，跳转到指定界⾯面。那么业务提供方可以在<code>handle</code>中这样处理:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[YYRouterregisterURLPattern:[NSString stringWithFormat:@&quot;hr://pushToHome&quot;] toHandler:^(NSDictionary *routerParameters) &#123;</span><br><span class="line">    id homeVC = [UIViewController new]; // 取出openURL中的completion，并调用</span><br><span class="line">    void (^block )(id result) = routerParameters[YYRouterParameterCompletion];</span><br><span class="line">    if (block) block(homeVC);</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
+
+<h6 id="openURL传对象参数"><a href="#openURL传对象参数" class="headerlink" title="openURL传对象参数"></a>openURL传对象参数</h6><p><code>openURL</code>除了了可以在<code>url</code>中拼接参数，还可以在在<code>useInfo</code>参数中传入复杂的对象参数。 如， <code>hr://pushToHome</code> 协议只通过<code>push</code>来展示<code>home</code>，那么可以要求，调⽤时传入当前的<code>navigation</code>界面。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[YYRouter registerURLPattern:[NSString stringWithFormat:@&quot;hr://pushToHome?id=1111&quot;] toHandler:^(NSDictionary</span><br><span class="line">*routerParameters) &#123;</span><br><span class="line">    id homeVC = [UIViewController new];</span><br><span class="line">    UINavigationController *nav = (UINavigationController *)routerParameters[YYRouterParameterUserInfo][@&quot;nav&quot;];</span><br><span class="line">    if ([nav isKindOfClass:[UINavigationController class]]) &#123;</span><br><span class="line">        [nav pushViewController:homeVC animated:YES];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
+
+<p>调⽤方需要传入当前的界面:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[YYRouter openURL:@&quot;hr://pushToHome&quot; withUserInfo:@[@&quot;nav&quot;:</span><br><span class="line">self.navigationCotroller] completion:nil];</span><br></pre></td></tr></table></figure>
+
+<h6 id="通⽤用处理理和interceptor"><a href="#通⽤用处理理和interceptor" class="headerlink" title="通⽤用处理理和interceptor"></a>通⽤用处理理和interceptor</h6><p>注册 <code>urlPattern</code> 的<code>handle</code>提供了完全的自定义定制。但有些流程是通用的，比如<code>handler</code>处理完要 判断是否要调用 <code>openURL</code> 中的 <code>completion</code>。 <code>YYRouter</code> 提供了一些通用的处理函数，如可以在 <code>handler</code>的末尾调用 <code>doCompletion</code>，来调用 <code>openURL</code> 中的 <code>completion</code> ，如:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[YYRouter registerURLPattern:[NSString</span><br><span class="line">stringWithFormat:@&quot;hr://showHome&quot;] toHandler:^(NSDictionary</span><br><span class="line">*routerParameters) &#123;</span><br><span class="line">    id homeVC = [UIViewController new];</span><br><span class="line">    [YYRouter doCompletion:routerParameters result:homeVC];</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
+
+<p>另外，⼀个模块还可以⾃定义一个<code>interceptor</code> ，在<code>handle</code>处理前<code>和handle</code>处理后做一些通用处 理。如，不想<code>在openURL</code>的<code>completion</code>中加手动跳转代码，⽽是想通过<code>url</code>中的参数进行全局界面跳 转，那么可以这么做:</p>
+<ul>
+<li>注册<code>urlPattern</code>，在<code>path</code>中加入跳转⽅式参数<code>&quot;:_route&quot;``。handler</code>中调⽤用 <code>endHandleParams</code>来 结束<code>handler</code>。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[YYRouter registerURLPattern:[NSString</span><br><span class="line">stringWithFormat:@&quot;hr://showHome/:_route&quot;] toHandler:^(NSDictionary *routerParameters) &#123;</span><br><span class="line">    id homeVC = [UIViewController new];</span><br><span class="line">    [YYRouter endHandleParams:routerParameters result:homeVC];</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>为模块添加⼀个<code>interceptor</code></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[YYRouter addInterceptor:[MyInterceptor new] forKey:@&quot;hr&quot;];</span><br></pre></td></tr></table></figure>
+<ul>
+<li>定义<code>interceptor</code></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">@interface MyInterceptor:NSObject&lt;YYRouterInterceptor&gt;</span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">@implementation MyInterceptor</span><br><span class="line">- (void)didHandleParams:(NSMutableDictionary *)params result:(id)result</span><br><span class="line">&#123;</span><br><span class="line">    NSString *route = params[@&quot;_route&quot;]; // 在当前界⾯面跳转</span><br><span class="line">    if ([route isEqualToString:@&quot;nav&quot;]) &#123;</span><br><span class="line">        UINavigationController *nav = [self getTopNav];</span><br><span class="line">        [nav pushViewController:result animated:YES];</span><br><span class="line">    &#125;</span><br><span class="line">    // 选中tab,并跳转</span><br><span class="line">    else if ([route isEqualToString:@&quot;tab3-nav&quot;]) &#123;</span><br><span class="line">        UITabBarController *tab = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;</span><br><span class="line">        [tab setSelectedIndex:3];</span><br><span class="line">        UINavigationController *nav = [tab selectedViewController];</span><br><span class="line">        [nav pushViewController:result animated:YES];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>调⽤时，可以不加<code>completion</code>了</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[YYRouter openURL:@&quot;hr://showHome/nav&quot; completion:nil];</span><br></pre></td></tr></table></figure>
+
+<h6 id="组件库pod管理"><a href="#组件库pod管理" class="headerlink" title="组件库pod管理"></a>组件库pod管理</h6><p>组件库统一使用pod私有库的⽅式管理。 Spec 索引统⼀放 <a href="http://company.com/example/YYFramework/Specs" target="_blank" rel="noopener">http://company.com/example/YYFramework/Specs</a> 下。<br>如何使用pod创建私有库,可以参考yytodolink。</p>
+<h1 id="4-通信方案优缺点分析"><a href="#4-通信方案优缺点分析" class="headerlink" title="4. 通信方案优缺点分析"></a>4. 通信方案优缺点分析</h1><p>以上是一些具体的实战应用，通信组件经过了特定需求的改造。为了更全面的分析方案优劣，我们一般会对如下几种方案进行考量：</p>
+<ol>
+<li>基于面向协议思想的服务注册方案</li>
+<li>基于路由 URL 的 UI 页面统跳管理</li>
+<li>基于反射的远程接口调用封装</li>
+<li>基于通知的广播方案</li>
+</ol>
+<h5 id="基于面向协议思想的服务注册方案。"><a href="#基于面向协议思想的服务注册方案。" class="headerlink" title="基于面向协议思想的服务注册方案。"></a>基于面向协议思想的服务注册方案。</h5><ul>
+<li>优势<ul>
+<li>代码自动补全和编译时检查都有效，实现简单，调用方便</li>
+<li>协议的所有实现仍然在模块内部，不需要写反射代码</li>
+<li>依赖接口而不是依赖对象，符合团队协作的“面向协议编程”的思想</li>
+</ul>
+</li>
+<li>劣势<ul>
+<li>如果服务提供方和使用方依赖的是公共模块中的同一份协议（protocol）, 当协议内容改变时，存在所有服务依赖模块编译失败的风险。</li>
+<li>需要一个注册过程，将 Protocol 协议与具体实现绑定起来。</li>
+</ul>
+</li>
+</ul>
+<p>业界里，蘑菇街的 <code>ServiceManager</code> 和阿里的 <code>BeeHive</code> 采用了这个方案。</p>
+<h6 id="例："><a href="#例：" class="headerlink" title="例："></a>例：</h6><p>每个模块提供自己对外服务的协议声明，然后将此声明注册到中间层。调用方能从中间层看到存在哪些服务接口，然后直接调用即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">//Goods 模块提供的所有对外服务都放在 GoodsModuleService 中</span><br><span class="line">@protocol GoodsModuleService</span><br><span class="line">- (NSArray*)getGoodsList;</span><br><span class="line">- (NSInteger)getGoodsCount;</span><br><span class="line">...</span><br><span class="line">@end</span><br><span class="line">//Goods 模块提供实现 GoodsModuleService 的对象,</span><br><span class="line">// 并在 +load 方法中注册</span><br><span class="line">@interface GoodsModule : NSObject&lt;GoodsModuleService&gt;</span><br><span class="line">@end</span><br><span class="line">@implementation GoodsModule</span><br><span class="line">+ (void)load &#123;</span><br><span class="line">    // 注册服务</span><br><span class="line">    [ServiceManager registerService:@protocol(service_protocol)</span><br><span class="line">                  withModule:self.class]</span><br><span class="line">&#125;</span><br><span class="line">// 提供具体实现</span><br><span class="line">- (NSArray*)getGoodsList &#123;...&#125;</span><br><span class="line">- (NSInteger)getGoodsCount &#123;...&#125;</span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">// 将 GoodsModuleService 放在某个公共模块中，对所有业务模块可见</span><br><span class="line">// 业务模块可以直接调用相关接口</span><br><span class="line">...</span><br><span class="line">id&lt;GoodsModuleService&gt; module = [ServiceManager objByService:@protocol(GoodsModuleService)];</span><br><span class="line">NSArray *list = [module getGoodsList];</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+
+<h5 id="基于路由-URL-的-UI-页面统跳管理。"><a href="#基于路由-URL-的-UI-页面统跳管理。" class="headerlink" title="基于路由 URL 的 UI 页面统跳管理。"></a>基于路由 URL 的 UI 页面统跳管理。</h5><ul>
+<li>优势<ul>
+<li><code>URL</code> 本身是一种跨多端的通用协议。使用路由URL统跳方案的优势是动态性及多端统一 (H5, iOS，Android，Weex/RN);</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>能处理的交互场景偏简单(所以一般更适用于简单UI页面跳转、app跳转）</li>
+<li>一些复杂操作和数据传输用这个方式实现，效果不高。</li>
+</ul>
+</li>
+</ul>
+<p>目前天猫和蘑菇街都有使用路由<code>URL</code> 作为自己的页面统跳方案，达到解耦的目的</p>
+<h5 id="基于反射的远程接口调用封装。"><a href="#基于反射的远程接口调用封装。" class="headerlink" title="基于反射的远程接口调用封装。"></a>基于反射的远程接口调用封装。</h5><ul>
+<li>优势<ul>
+<li>实现原理是<code>Target-Action</code></li>
+<li>调用简单方便，代码自动补全和编译时检查都仍然有效。</li>
+<li>相比于<code>URL Router</code>，`Target-Action也不需要注册和内存占用</li>
+</ul>
+</li>
+<li>劣势<ul>
+<li><code>category</code> 存在重名覆盖的风险，需要通过开发规范以及一些检查机制来规避。</li>
+<li><code>Mediator</code> 只是收敛了 <code>hardcode</code>, 并未消除 <code>hardcode</code>, 仍然对开发效率有一定影响。</li>
+<li>开发者定义的类和方法，必须要遵守<code>Target-Action</code>的命名规则，调用者可能会因为硬编码问题导致调用失败</li>
+</ul>
+</li>
+</ul>
+<p>业界的 <code>CTMediator</code> 开源库，以及美团都是采用类似方案。</p>
+<p>当无法 <code>import</code> 某个类的头文件但仍需调用其方法时，通常会用反射来实现。</p>
+<h6 id="例：-1"><a href="#例：-1" class="headerlink" title="例："></a>例：</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Class manager = NSClassFromString(@&quot;YZGoodsManager&quot;);</span><br><span class="line">NSArray *list = [manager performSelector:@selector(getGoodsList)];</span><br><span class="line">//code to handle the list</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>正如上总结，这种方式存在大量的<code>hardcode</code>字符串、无法触发代码自动补全、容易出现拼写错误等问题，而且这类错误只能在运行时触发相关方法后才能发现。无论是开发效率还是开发质量都有较大的影响。</p>
+<p>解决的思路可以借鉴「移动端向后台接口发网络请」这个案例。针对这类问题，创建一个网络层，将这类“危险代码”封装到里面。上层业务调用时网络层接口时，不需要 <code>hardcode</code> 字符串，也不需要理解内部麻烦的逻辑。</p>
+<p>类似的，可以将模块间通讯也封装到一个“网络层”中（或者叫消息转发层）。这样危险代码只存在某几个文件里，可以特别地进行<code>code review</code>和联调测试。后期还可以通过单元测试来保障质量。模块化方案中，我们可以称这类“转发层”为 Mediator (当然你也可以起个别的名字)。同时因为 <code>performSelector</code> 方法附带参数数量有限，也没有返回值，所以更适合使用 <code>NSInvocation</code> 来实现。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">//Mediator 提供基于 NSInvocation 的远程接口调用方法的统一封装</span><br><span class="line">- (id)performTarget:(NSString *)targetName</span><br><span class="line">             action:(NSString *)actionName</span><br><span class="line">             params:(NSDictionary *)params;</span><br><span class="line"></span><br><span class="line">//Goods 模块所有对外提供的方法封装在一个 Category 中</span><br><span class="line">@interface Mediator(Goods)</span><br><span class="line">- (NSArray*)goods_getGoodsList;</span><br><span class="line">- (NSInteger)goods_getGoodsCount;</span><br><span class="line">...</span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">@impletation Mediator(Goods)</span><br><span class="line">- (NSArray*)goods_getGoodsList &#123;</span><br><span class="line">    return [self performTarget:@“GoodsModule” action:@&quot;getGoodsList&quot; params:nil];</span><br><span class="line">&#125;</span><br><span class="line">- (NSInteger)goods_getGoodsCount &#123;</span><br><span class="line">    return [self performTarget:@“GoodsModule” action:@&quot;getGoodsCount&quot; params:nil];</span><br><span class="line">&#125;</span><br><span class="line">...</span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<p>然后各个业务模块依赖 <code>Mediator</code>, 就可以直接调用这些方法了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//业务方依赖Mediator模块，可以直接调用相关方法</span><br><span class="line">...</span><br><span class="line">NSArray *list = [[Mediator sharedInstance] goods_getGoodsList];</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+
+<h5 id="基于通知的广播方案"><a href="#基于通知的广播方案" class="headerlink" title="基于通知的广播方案"></a>基于通知的广播方案</h5><p>基于通知的模块间通讯方案，实现思路非常简单, 直接基于系统的 <code>NSNotificationCenter</code> 即可。优势是实现简单，非常适合处理一对多的通讯场景。劣势是仅适用于简单通讯场景。复杂数据传输，同步调用等方式都不太方便。模块化通讯方案中，更多的是把通知方案作为以上几种方案的补充。</p>
+<h1 id="Res-Link"><a href="#Res-Link" class="headerlink" title="Res Link"></a>Res Link</h1><ul>
+<li><a href="https://www.infoq.cn/article/BwVSA-aI2jVv4IRNOwps" target="_blank" rel="noopener">有赞移动 iOS 组件化（模块化）架构设计实践</a></li>
+<li><a href="https://tech.meituan.com/2018/11/08/ios-category-module-communicate.html" target="_blank" rel="noopener">Category 特性在 iOS 组件化中的应用与管控</a></li>
+<li><a href="https://www.jianshu.com/p/2af9c063fd85" target="_blank" rel="noopener">iOS 组件通信方案 </a></li>
+<li><a href="https://github.com/meili/MGJRouter" target="_blank" rel="noopener">蘑菇街</a></li>
+<li><a href="https://github.com/casatwy/CTMediator" target="_blank" rel="noopener">CTMediator</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E7%BB%84%E4%BB%B6%E5%8C%96/" rel="tag"># 组件化</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/20/%E7%BB%84%E4%BB%B6%E5%8C%96%E4%BB%93%E5%BA%93%E6%90%AD%E5%BB%BA%E6%B5%81%E7%A8%8B/" rel="next" title="组件化仓库搭建流程">
+                <i class="fa fa-chevron-left"></i> 组件化仓库搭建流程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/11/23/App%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87%E4%B8%8E%E4%BC%98%E5%8C%96%E7%9A%84%E6%96%B9%E6%A1%88/" rel="prev" title="App性能提升与优化的方案">
+                App性能提升与优化的方案 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">YoU1024</p>
+              <p class="site-description motion-element" itemprop="description">命运对勇士说/暴风雨要来了/勇士低语/我就是暴风雨</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-6"><a class="nav-link" href="#设计模式-vs-架构设计"><span class="nav-number">1.</span> <span class="nav-text">设计模式 vs 架构设计</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-架构分层设计"><span class="nav-number"></span> <span class="nav-text">1. 架构分层设计</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-组件通信"><span class="nav-number"></span> <span class="nav-text">2. 组件通信</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-使用"><span class="nav-number"></span> <span class="nav-text">3. 使用</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#YYModuleManager"><span class="nav-number">1.</span> <span class="nav-text">YYModuleManager</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#protocol"><span class="nav-number">2.</span> <span class="nav-text">protocol</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#实现类"><span class="nav-number">3.</span> <span class="nav-text">实现类</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#平台⽅"><span class="nav-number">4.</span> <span class="nav-text">平台⽅</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#调⽤⽅"><span class="nav-number">5.</span> <span class="nav-text">调⽤⽅</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#YYRouter"><span class="nav-number"></span> <span class="nav-text">YYRouter</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#⾼级用法"><span class="nav-number">1.</span> <span class="nav-text">⾼级用法</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#openURL传对象参数"><span class="nav-number">2.</span> <span class="nav-text">openURL传对象参数</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#通⽤用处理理和interceptor"><span class="nav-number">3.</span> <span class="nav-text">通⽤用处理理和interceptor</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#组件库pod管理"><span class="nav-number">4.</span> <span class="nav-text">组件库pod管理</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-通信方案优缺点分析"><span class="nav-number"></span> <span class="nav-text">4. 通信方案优缺点分析</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#基于面向协议思想的服务注册方案。"><span class="nav-number"></span> <span class="nav-text">基于面向协议思想的服务注册方案。</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#例："><span class="nav-number">1.</span> <span class="nav-text">例：</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#基于路由-URL-的-UI-页面统跳管理。"><span class="nav-number"></span> <span class="nav-text">基于路由 URL 的 UI 页面统跳管理。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#基于反射的远程接口调用封装。"><span class="nav-number"></span> <span class="nav-text">基于反射的远程接口调用封装。</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#例：-1"><span class="nav-number">1.</span> <span class="nav-text">例：</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#基于通知的广播方案"><span class="nav-number"></span> <span class="nav-text">基于通知的广播方案</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Res-Link"><span class="nav-number"></span> <span class="nav-text">Res Link</span></a></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">YoU1024</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

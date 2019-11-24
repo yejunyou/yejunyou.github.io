@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="性能优化,耗电处理,App瘦身,启动速度," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="耗电处理 耗电的来源 CPU处理 processing 网络Networking 定位 Location 图像 Graphics">
+<meta name="keywords" content="性能优化,耗电处理,App瘦身,启动速度">
+<meta property="og:type" content="article">
+<meta property="og:title" content="App优化之启动速度、瘦身、耗电处理">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;23&#x2F;App%E4%BC%98%E5%8C%96%E4%B9%8B%E5%90%AF%E5%8A%A8%E9%80%9F%E5%BA%A6%E3%80%81%E7%98%A6%E8%BA%AB%E3%80%81%E8%80%97%E7%94%B5%E5%A4%84%E7%90%86&#x2F;index.html">
+<meta property="og:site_name" content="YoU1024">
+<meta property="og:description" content="耗电处理 耗电的来源 CPU处理 processing 网络Networking 定位 Location 图像 Graphics">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-11-24T05:36:45.368Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/11/23/App优化之启动速度、瘦身、耗电处理/"/>
+
+
+
+
+
+  <title>App优化之启动速度、瘦身、耗电处理 | YoU1024</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">YoU1024</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">严肃、活泼、团结、紧张</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/23/App%E4%BC%98%E5%8C%96%E4%B9%8B%E5%90%AF%E5%8A%A8%E9%80%9F%E5%BA%A6%E3%80%81%E7%98%A6%E8%BA%AB%E3%80%81%E8%80%97%E7%94%B5%E5%A4%84%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YoU1024">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YoU1024">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">App优化之启动速度、瘦身、耗电处理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-23T23:12:38+08:00">
+                2019-11-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="耗电处理"><a href="#耗电处理" class="headerlink" title="耗电处理"></a>耗电处理</h1><ul>
+<li>耗电的来源<ul>
+<li>CPU处理 <code>processing</code></li>
+<li>网络<code>Networking</code></li>
+<li>定位 <code>Location</code></li>
+<li>图像 <code>Graphics</code></li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+
+<h5 id="耗电的优化"><a href="#耗电的优化" class="headerlink" title="耗电的优化"></a>耗电的优化</h5><ul>
+<li>降低CPU/GPU的功耗</li>
+<li>少用定时器</li>
+<li>优化I/O操作<ul>
+<li>不要频繁写入小数据，最好批量一次性写入</li>
+<li>读写大量数据使用<code>dispatch_io</code><ul>
+<li>提供了基于GCD的异步文件I/O的API</li>
+<li>系统会优化磁盘访问</li>
+</ul>
+</li>
+<li>数据量比较大，使用数据库（<code>SQLite</code>、<code>CoreData</code>）</li>
+</ul>
+</li>
+<li>网络优化<ul>
+<li>压缩数据</li>
+<li>缓存（多次请求结果相同的时候）</li>
+<li>断点续传（解决网络不稳定时可能多次传输相同内容）</li>
+<li>状态检测（网络不可用的时候，不要执行网络请求）</li>
+<li>超时交互（让用户取消长时间请求、超时请求）</li>
+<li>批量传输<ul>
+<li>视频流，要整个文件或者块为单位下载，不要小数据包下载</li>
+<li>广告，一次性多下载一些，再多次慢慢展示</li>
+<li>邮件，一次下载多封，不要一封一封的下载</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>定位：<code>CLLocatoinManager</code><ul>
+<li>如果只是需要快速确定用户位置，最好用<code>CLLocationManager</code>的<code>requestLocation</code>方法。<ul>
+<li>定位完成后，会自动让定位硬件断电</li>
+</ul>
+</li>
+<li>尽量降低定位精度，比如尽量不要使用精度最高的<code>kCLLocationAccuracyBest</code></li>
+<li>需要后台定位时，尽量设置<code>pausesLocationUpdatesAutomatically</code>为<code>YES</code>，如果用户不太可能移动的时候系统会自动暂停位置更新</li>
+<li>尽量不要使用<code>startMonitoringSignificantLocationChanges</code>，优先考虑<code>startMonitoringForRegion:</code></li>
+<li>如果不是导航应用，尽量不要实时更新位置，定位完毕就关掉定位服务</li>
+</ul>
+</li>
+<li>硬件监测优化<ul>
+<li>用户移动、摇晃、倾斜设备，产生动作（motion）事件</li>
+<li>触发设备的加速计、陀螺仪、磁力计</li>
+<li>不用的场合及时关闭这些硬件</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="App启动优化"><a href="#App启动优化" class="headerlink" title="App启动优化"></a>App启动优化</h1><h5 id="App启动的三个阶段"><a href="#App启动的三个阶段" class="headerlink" title="App启动的三个阶段"></a>App启动的三个阶段</h5><ol>
+<li><code>dyld</code></li>
+<li><code>runtime</code></li>
+<li><code>main</code></li>
+</ol>
+<hr>
+<ul>
+<li><p><code>dyld</code></p>
+<ul>
+<li>减少动态库、合并一些动态库（定期清理不必要的动态库）</li>
+<li>减少Objc类、分类的数量、减少Selector数量（定期清理不必要的类、分类）</li>
+<li>减少<code>C++</code>虚函数数量</li>
+<li>Swift尽量使用<code>struct</code></li>
+</ul>
+</li>
+<li><p><code>runtime</code></p>
+<ul>
+<li>文件内容的解析</li>
+<li><code>+load</code></li>
+<li>各种objc的初始化（注册Objc类、初始化对象等）</li>
+<li>C++静态初始化器</li>
+<li>用<code>+initialize方法</code>和<code>dispatch_once</code>取代所有的<code>__attribute__((constructor))</code>、<code>C++</code>静态构造器、<code>ObjC</code>的<code>+load</code></li>
+</ul>
+</li>
+<li><p><code>main</code></p>
+<ul>
+<li>按需加载</li>
+<li>在不影响用户体验的前提下，尽可能将一些操作延迟，不要全部都放在<code>finishLaunching</code>方法中</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="安装包瘦身"><a href="#安装包瘦身" class="headerlink" title="安装包瘦身"></a>安装包瘦身</h1><ul>
+<li>安装包（IPA）主要由<code>可执行文件</code>、<code>资源</code>组成</li>
+<li>资源（图片、音频、视频等）<ul>
+<li>图片资源放到 <code>App assets</code>里，选择默认的压缩类型，相比放到bundle，<a href="https://developer.apple.com/videos/play/wwdc2017/513" target="_blank" rel="noopener">压缩大小能减少15%~20%，解码时间减少20%（High Efficiency Image File Format）</a></li>
+<li>采取无损压缩</li>
+<li>去除没有用到的资源：<a href="https://github.com/tinymind/LSUnusedResources" target="_blank" rel="noopener">https://github.com/tinymind/LSUnusedResources</a></li>
+</ul>
+</li>
+<li>可执行文件瘦身<ul>
+<li>编译器优化</li>
+<li><code>Strip Linked Product</code>、<code>Make Strings Read-Only</code>、<code>Symbols Hidden by Default</code>设置为<code>YES</code></li>
+<li>去掉异常支持，<code>Enable C++ Exceptions</code>、<code>Enable Objective-C Exceptions</code>设置为NO， <code>Other C Flags</code>添加<code>-fno-exceptions</code></li>
+<li>利用<a href="https://www.jetbrains.com/objc/" target="_blank" rel="noopener"><code>AppCode</code></a>检测未使用的代码：菜单栏 -&gt; <code>Code</code> -&gt; <code>Inspect Code</code></li>
+</ul>
+</li>
+<li>编写<code>LLVM</code>插件检测出重复代码、未被调用的代码</li>
+<li><a href="https://github.com/huanxsd/LinkMap" target="_blank" rel="noopener"><code>LinkMap</code></a><ul>
+<li>生成<code>LinkMap</code>文件，可以查看可执行文件的具体组成(每个类最终占用可执行文件的大小)</li>
+<li><code>Build Settings</code> -&gt; <code>Linking</code> -&gt; <code>Path to Link Map File</code> &amp;&amp; <code>Write Link Map File(YES)</code><h6 id="一些好的开发习惯"><a href="#一些好的开发习惯" class="headerlink" title="一些好的开发习惯"></a>一些好的开发习惯</h6></li>
+</ul>
+</li>
+<li>不要为了一片树叶引入一片森林</li>
+<li><code>check</code>引入资源的大小</li>
+<li>及时清理废弃模块</li>
+<li>同质库只引入一种<ul>
+<li>譬如AFnetworking vs ASIHttpRequest </li>
+</ul>
+</li>
+<li>建立预警机制<ul>
+<li>脚本打包，除了正常的生成ipa包之外，也要生成分析文件，列出相对上一次上线包大了多少，类文件增加了多少</li>
+</ul>
+</li>
+</ul>
+<h1 id="Res-Link"><a href="#Res-Link" class="headerlink" title="Res Link"></a>Res Link</h1><ul>
+<li><a href="https://www.jianshu.com/p/bd3b1580cef6" target="_blank" rel="noopener">iPhone安装包的优化</a></li>
+<li><a href="https://www.jianshu.com/p/a3151dfebc9c" target="_blank" rel="noopener">今日头条iOS端安装包大小优化—思路与实践</a></li>
+<li><a href="https://www.jianshu.com/p/7096478ccbe7" target="_blank" rel="noopener">【性能优化】今日头条iOS客户端启动速度优化</a></li>
+<li><a href="https://www.jianshu.com/p/0c6fcf59ab82" target="_blank" rel="noopener">[ WWDC2018 ] - 优化 App Assets Optimizing App Assets</a></li>
+<li><a href="https://github.com/skyming/iOS-Performance-Optimization" target="_blank" rel="noopener">iOS-Performance-Optimization（集合）</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" rel="tag"># 性能优化</a>
+          
+            <a href="/tags/%E8%80%97%E7%94%B5%E5%A4%84%E7%90%86/" rel="tag"># 耗电处理</a>
+          
+            <a href="/tags/App%E7%98%A6%E8%BA%AB/" rel="tag"># App瘦身</a>
+          
+            <a href="/tags/%E5%90%AF%E5%8A%A8%E9%80%9F%E5%BA%A6/" rel="tag"># 启动速度</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/23/App%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87%E4%B8%8E%E4%BC%98%E5%8C%96%E7%9A%84%E6%96%B9%E6%A1%88/" rel="next" title="App性能提升与优化的方案">
+                <i class="fa fa-chevron-left"></i> App性能提升与优化的方案
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/11/24/%E9%80%86%E5%90%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%92%8C%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/" rel="prev" title="逆向-环境配置和遇到的坑">
+                逆向-环境配置和遇到的坑 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">YoU1024</p>
+              <p class="site-description motion-element" itemprop="description">命运对勇士说/暴风雨要来了/勇士低语/我就是暴风雨</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#耗电处理"><span class="nav-number">1.</span> <span class="nav-text">耗电处理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#耗电的优化"><span class="nav-number">1.0.0.0.1.</span> <span class="nav-text">耗电的优化</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#App启动优化"><span class="nav-number">2.</span> <span class="nav-text">App启动优化</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#App启动的三个阶段"><span class="nav-number">2.0.0.0.1.</span> <span class="nav-text">App启动的三个阶段</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装包瘦身"><span class="nav-number">3.</span> <span class="nav-text">安装包瘦身</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#一些好的开发习惯"><span class="nav-number">3.0.0.0.0.1.</span> <span class="nav-text">一些好的开发习惯</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Res-Link"><span class="nav-number">4.</span> <span class="nav-text">Res Link</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">YoU1024</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="逆向," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="逆向App的几个主要步骤，和涉及的工具链安装：  界面分析 Cycript、Reveal   代码分析 对Mach-O文件的静态分析 MachOView、class-dump、Hopper Disassembler、ida等   动态调试 对运行中的APP进行代码调试 ebugserver、LLDB">
+<meta name="keywords" content="逆向">
+<meta property="og:type" content="article">
+<meta property="og:title" content="逆向-环境配置和遇到的坑">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;24&#x2F;%E9%80%86%E5%90%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%92%8C%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91&#x2F;index.html">
+<meta property="og:site_name" content="YoU1024">
+<meta property="og:description" content="逆向App的几个主要步骤，和涉及的工具链安装：  界面分析 Cycript、Reveal   代码分析 对Mach-O文件的静态分析 MachOView、class-dump、Hopper Disassembler、ida等   动态调试 对运行中的APP进行代码调试 ebugserver、LLDB">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;24&#x2F;%E9%80%86%E5%90%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%92%8C%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91&#x2F;pic_jailbreak_ios12.png">
+<meta property="og:updated_time" content="2019-11-24T07:37:55.225Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;24&#x2F;%E9%80%86%E5%90%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%92%8C%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91&#x2F;pic_jailbreak_ios12.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/11/24/逆向-环境配置和遇到的坑/"/>
+
+
+
+
+
+  <title>逆向-环境配置和遇到的坑 | YoU1024</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">YoU1024</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">严肃、活泼、团结、紧张</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/24/%E9%80%86%E5%90%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%92%8C%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YoU1024">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YoU1024">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">逆向-环境配置和遇到的坑</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-24T15:26:20+08:00">
+                2019-11-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>逆向App的几个主要步骤，和涉及的工具链安装：</p>
+<ul>
+<li>界面分析<ul>
+<li><code>Cycript</code>、<code>Reveal</code></li>
+</ul>
+</li>
+<li>代码分析<ul>
+<li>对<code>Mach-O</code>文件的静态分析</li>
+<li><code>MachOView</code>、<code>class-dump</code>、<code>Hopper Disassembler</code>、<code>ida</code>等</li>
+</ul>
+</li>
+<li>动态调试<ul>
+<li>对运行中的APP进行代码调试</li>
+<li><code>ebugserver</code>、<code>LLDB</code><a id="more"></a></li>
+</ul>
+</li>
+<li>注入代码<ul>
+<li>注入代码到APP中</li>
+<li>可能需要重新签名、打包ipa</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>我操作的手机是iPhone 6Plus（iOS 9.3.3）和 iPhone5s（iOS 12.2），不同版本遇到坑情况可能不一样。</p>
+</blockquote>
+<p>越狱后开始一系列操作…</p>
+<p>以下是正文：</p>
+<h1 id="安装补丁"><a href="#安装补丁" class="headerlink" title="安装补丁"></a>安装补丁</h1><ul>
+<li><code>Apple File Conduit &quot;2&quot;</code><ul>
+<li>可以访问整个iOS设备的文件系统</li>
+<li>类似的补丁还有：<code>afc2</code>、<code>afc2add</code></li>
+<li>软件源：<ul>
+<li><a href="http://apt.saurik.com" target="_blank" rel="noopener">http://apt.saurik.com</a></li>
+<li><a href="http://apt.saurik.com/cydia（上面如果添加失败，改用这个）" target="_blank" rel="noopener">http://apt.saurik.com/cydia（上面如果添加失败，改用这个）</a></li>
+<li><a href="http://apt.25pp.com" target="_blank" rel="noopener">http://apt.25pp.com</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>AppSync Unified</code><ul>
+<li>可以绕过系统验证，随意安装、运行破解的ipa安装包</li>
+<li>软件源：<a href="http://apt.25pp.com" target="_blank" rel="noopener">http://apt.25pp.com</a></li>
+</ul>
+</li>
+<li><code>iFile</code><ul>
+<li>可以在iPhone上自由访问iOS文件系统</li>
+<li>类似的还有<code>Filza File Manager</code>、<code>File Browser</code></li>
+<li><a href="http://apt.thebigboss.org/repofiles/cydia" target="_blank" rel="noopener">http://apt.thebigboss.org/repofiles/cydia</a> （也就是bigboss）</li>
+</ul>
+</li>
+<li>如果通过Cydia源安装deb失败<ul>
+<li>可以先从网上下载deb格式的安装包【例如： 包名 + deb】</li>
+<li>然后将deb安装包放到<code>/var/root/Media/Cydia/AutoInstall</code>【如果不存在该文件路径，就手动创建！！】</li>
+<li>重启手机，Cydia就会自动安装deb</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="mjcript："><a href="#mjcript：" class="headerlink" title="mjcript："></a>mjcript：</h1><ul>
+<li>对<code>cycript</code>的一层封装，语法简练、效率高</li>
+<li>地址：<a href="https://github.com/CoderMJLee/mjcript" target="_blank" rel="noopener">https://github.com/CoderMJLee/mjcript</a></li>
+<li>放到<code>/usr/lib/cycript0.9/com/</code></li>
+<li>我第一次是放在放到<code>/usr/lib/cycript0.9/</code>,后来移动到<code>/usr/lib/cycript0.9/com/</code>失灵了,放回到上一层目录又好了</li>
+</ul>
+<h1 id="MJAppTools"><a href="#MJAppTools" class="headerlink" title="MJAppTools:"></a>MJAppTools:</h1><ul>
+<li>地址：<a href="https://github.com/CoderMJLee/MJAppTools" target="_blank" rel="noopener">https://github.com/CoderMJLee/MJAppTools</a></li>
+<li>将命令行工具存放到手机的<code>/usr/bin</code>目录</li>
+<li><code>chmod +x /usr/bin/MJAppTools</code></li>
+</ul>
+<p>用法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-l  &lt;regex&gt;   列出用户安装的应用</span><br><span class="line">-le &lt;regex&gt;   列出用户安装的加壳应用</span><br><span class="line">-ld &lt;regex&gt;   列出用户安装的未加壳应用</span><br><span class="line">-ls &lt;regex&gt;   列出系统的应用</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="Reveal"><a href="#Reveal" class="headerlink" title="Reveal"></a>Reveal</h1><ul>
+<li>作用：debug第三方App视图层级的神器</li>
+<li>有的app一连接Reveal就会挂，谨慎猜测可能有反调试</li>
+<li><code>Cycia install</code> : <code>Reveal load</code><ul>
+<li>软件源：<a href="http://apt.so/codermjlee" target="_blank" rel="noopener">http://apt.so/codermjlee</a> 【iptional】</li>
+</ul>
+</li>
+<li>安装：<ul>
+<li>找到Mac的Reveal中的<code>RevealServer</code>文件，覆盖iPhone的: <code>/Library/RHRevealLoader/RevealServer</code>文件<br><del>- 如果没有就手动创建</del></li>
+<li><code>iOS9.3.3</code> 是放在 <code>/Library/frameworks/RevealServer.framework</code></li>
+<li>异常解决方案：<a href="https://www.jianshu.com/p/6cac1052879d" target="_blank" rel="noopener">https://www.jianshu.com/p/6cac1052879d</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="重启指令"><a href="#重启指令" class="headerlink" title="重启指令"></a>重启指令</h1><ul>
+<li>重启<code>SpringBoard</code>或者重启手机，可以在iPhone上输入终端命令</li>
+<li>重启<code>SpringBoard</code>：<code>killall SpringBoard</code></li>
+<li>重启手机：<code>reboot</code></li>
+</ul>
+<hr>
+<h1 id="Clutch"><a href="#Clutch" class="headerlink" title="Clutch"></a>Clutch</h1><ul>
+<li>作用：砸壳</li>
+<li>输入APP序号或者Bundle Id进行脱壳操作：<code>Clutch -d APP序号</code>或<code>BundleId</code></li>
+<li>脱壳成功后会生成一个ipa文件</li>
+<li>安装：<ul>
+<li><a href="https://github.com/KJCracks/Clutch/releases" target="_blank" rel="noopener">https://github.com/KJCracks/Clutch/releases</a></li>
+<li>/usr/bin/</li>
+<li>chmod +x /usr/bin/Clutch</li>
+</ul>
+</li>
+</ul>
+<h1 id="dumpdecrypted"><a href="#dumpdecrypted" class="headerlink" title="dumpdecrypted"></a>dumpdecrypted</h1><ul>
+<li>作用：砸壳</li>
+<li><a href="https://github.com/stefanesser/dumpdecrypted" target="_blank" rel="noopener">https://github.com/stefanesser/dumpdecrypted</a></li>
+<li>DYLD_INSERT_LIBRARIES=dumpdecrypted.dylib  可执行文件路径</li>
+<li>出现了<code>killed 9</code>，解决方法：<ul>
+<li><code>link issues</code>: <a href="https://github.com/stefanesser/dumpdecrypted/issues/19" target="_blank" rel="noopener">https://github.com/stefanesser/dumpdecrypted/issues/19</a></li>
+<li>iPhone 6Plus 9.3.3这个问题有解，iPhone5s 12.2暂时无解<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 切换到`mobile`用户：</span><br><span class="line">su mobile</span><br><span class="line">cd /var/mobile/Documents</span><br><span class="line">DYLD_INSERT_LIBRARIES=/usr/lib/dumpdecrypted.dylib &lt;可执行文件路径&gt;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="class-dump"><a href="#class-dump" class="headerlink" title="class-dump"></a>class-dump</h1><ul>
+<li>class-dump -H  <Mach-O file path> -o Headers</Mach-O></li>
+<li>-H 要生成头文件</li>
+<li>-o 头文件目录</li>
+</ul>
+<h1 id="otool"><a href="#otool" class="headerlink" title="otool"></a>otool</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">otool -l WeChat.decrypted | grep crypt</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="DebugServicer"><a href="#DebugServicer" class="headerlink" title="DebugServicer"></a>DebugServicer</h1><ul>
+<li>作用：<code>lldb</code>调试第三方app</li>
+<li>导出：<code>/Developer/usr/bin/debugserver</code></li>
+<li>导出签名权限 <code>$ ldid -e debugserver &gt; debugserver.entitlements</code></li>
+<li>配置<code>debugserver.entitlements</code><ul>
+<li>添加以下两个属性，并设置为<code>YES</code></li>
+<li><code>get-task-allow</code></li>
+<li><code>task_for_pid-allow</code></li>
+</ul>
+</li>
+<li>重签名：<code>$ ldid -Sdebugserver.entitlements debugserver</code></li>
+<li>放到：<code>/usr/bin</code></li>
+</ul>
+<p>使用:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// iPhone open debugserver</span><br><span class="line">$ debugserver *:10011 -a WeChat</span><br><span class="line"></span><br><span class="line">// Mac open lldb</span><br><span class="line">$ lldb</span><br><span class="line">$ process connect connect://127.0.0.1:10011</span><br><span class="line">$ process connect connect://localhost:10011</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="终端编辑快捷键"><a href="#终端编辑快捷键" class="headerlink" title="终端编辑快捷键"></a>终端编辑快捷键</h1><ul>
+<li>ctrl+u 删除命令行开始至光标处</li>
+<li>ctrl+k 删除光标处至命令行结尾</li>
+<li>ctrl+a 光标移动到最前面</li>
+<li>ctrl+e 光标移动到最后面</li>
+</ul>
+<hr>
+<h1 id="Res-Link"><a href="#Res-Link" class="headerlink" title="Res Link"></a>Res Link</h1><p>如果Cydia被你搞砸了，想要恢复要非越狱环境，下面的链接或许有帮助</p>
+<ul>
+<li><a href="https://mp.weixin.qq.com/s/uQ6m8j_7ZuMxlrOr5Ebtvw" target="_blank" rel="noopener">unc0ver iOS 12.0 - 12.1.2 越狱指南</a></li>
+<li><a href="https://mp.weixin.qq.com/s/oAsfterDuPhknEDgQhbhgw" target="_blank" rel="noopener">Chimera iOS 12.0 - 12.2 越狱指南</a></li>
+<li><a href="https://mp.weixin.qq.com/s/vnELnVRRdGeTEiGvDesGhQ" target="_blank" rel="noopener">Chimera 越狱使用 Cydia</a></li>
+<li><a href="https://mp.weixin.qq.com/s/-WJo2YgHVZl1vKg0kgWUTA" target="_blank" rel="noopener">清除越狱环境，Chimera 篇</a></li>
+<li><a href="https://mp.weixin.qq.com/s/ZNmAsRwnrHvEDMhrsqrLTA" target="_blank" rel="noopener">清除越狱环境，unc0ver 篇</a></li>
+<li><a href="https://mrmad.com.tw/category/jb/jailbreak-news" target="_blank" rel="noopener">疯先生越獄新聞与教学</a></li>
+<li><a href="https://mrmad.com.tw/ios124-unc0ver-tweaks-list" target="_blank" rel="noopener">iOS 12.4 越獄最新 unc0ver 越獄工具插件支援清單</a></li>
+</ul>
+<h5 id="关于jfinject："><a href="#关于jfinject：" class="headerlink" title="关于jfinject："></a>关于jfinject：</h5><ul>
+<li>iOS越狱以及cycript的安装 <a href="https://jason5.cn/blog/iosyue-yu-yi-ji-cycriptde-an-zhuang.html" target="_blank" rel="noopener">https://jason5.cn/blog/iosyue-yu-yi-ji-cycriptde-an-zhuang.html</a></li>
+<li>iOS（十四）高版本越狱的坑 &amp; killed 9 <a href="http://www.gandalf.site/2019/05/ios-killed-9.html" target="_blank" rel="noopener">http://www.gandalf.site/2019/05/ios-killed-9.html</a></li>
+<li>iOS12越狱填坑 <a href="https://davidlii.cn/2019/03/28/jailbreak-ios12.html" target="_blank" rel="noopener">https://davidlii.cn/2019/03/28/jailbreak-ios12.html</a></li>
+</ul>
+<p><img src="/2019/11/24/%E9%80%86%E5%90%91-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%92%8C%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/pic_jailbreak_ios12.png" alt></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E9%80%86%E5%90%91/" rel="tag"># 逆向</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/23/App%E4%BC%98%E5%8C%96%E4%B9%8B%E5%90%AF%E5%8A%A8%E9%80%9F%E5%BA%A6%E3%80%81%E7%98%A6%E8%BA%AB%E3%80%81%E8%80%97%E7%94%B5%E5%A4%84%E7%90%86/" rel="next" title="App优化之启动速度、瘦身、耗电处理">
+                <i class="fa fa-chevron-left"></i> App优化之启动速度、瘦身、耗电处理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/11/24/%E9%80%86%E5%90%91-lldb%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95/" rel="prev" title="逆向-lldb动态调试">
+                逆向-lldb动态调试 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">YoU1024</p>
+              <p class="site-description motion-element" itemprop="description">命运对勇士说/暴风雨要来了/勇士低语/我就是暴风雨</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装补丁"><span class="nav-number">1.</span> <span class="nav-text">安装补丁</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mjcript："><span class="nav-number">2.</span> <span class="nav-text">mjcript：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MJAppTools"><span class="nav-number">3.</span> <span class="nav-text">MJAppTools:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reveal"><span class="nav-number">4.</span> <span class="nav-text">Reveal</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#重启指令"><span class="nav-number">5.</span> <span class="nav-text">重启指令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Clutch"><span class="nav-number">6.</span> <span class="nav-text">Clutch</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dumpdecrypted"><span class="nav-number">7.</span> <span class="nav-text">dumpdecrypted</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#class-dump"><span class="nav-number">8.</span> <span class="nav-text">class-dump</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#otool"><span class="nav-number">9.</span> <span class="nav-text">otool</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DebugServicer"><span class="nav-number">10.</span> <span class="nav-text">DebugServicer</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#终端编辑快捷键"><span class="nav-number">11.</span> <span class="nav-text">终端编辑快捷键</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Res-Link"><span class="nav-number">12.</span> <span class="nav-text">Res Link</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#关于jfinject："><span class="nav-number">12.0.0.0.1.</span> <span class="nav-text">关于jfinject：</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">YoU1024</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

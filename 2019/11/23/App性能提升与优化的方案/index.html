@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="性能优化,卡顿监测," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="屏幕上显示的内容，是由CPU和GPU一起协作完成的。">
+<meta name="keywords" content="性能优化,卡顿监测">
+<meta property="og:type" content="article">
+<meta property="og:title" content="App性能提升与优化的方案">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;23&#x2F;App%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87%E4%B8%8E%E4%BC%98%E5%8C%96%E7%9A%84%E6%96%B9%E6%A1%88&#x2F;index.html">
+<meta property="og:site_name" content="YoU1024">
+<meta property="og:description" content="屏幕上显示的内容，是由CPU和GPU一起协作完成的。">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;23&#x2F;App%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87%E4%B8%8E%E4%BC%98%E5%8C%96%E7%9A%84%E6%96%B9%E6%A1%88&#x2F;rendering.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;23&#x2F;App%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87%E4%B8%8E%E4%BC%98%E5%8C%96%E7%9A%84%E6%96%B9%E6%A1%88&#x2F;sync.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;23&#x2F;App%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87%E4%B8%8E%E4%BC%98%E5%8C%96%E7%9A%84%E6%96%B9%E6%A1%88&#x2F;%E5%8D%A1%E9%A1%BF%E5%8E%9F%E5%9B%A0%E7%AE%AD%E5%A4%B4%E5%9B%BE.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;23&#x2F;App%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87%E4%B8%8E%E4%BC%98%E5%8C%96%E7%9A%84%E6%96%B9%E6%A1%88&#x2F;runloop%E8%BF%90%E8%A1%8C%E9%80%BB%E8%BE%91.png">
+<meta property="og:updated_time" content="2019-11-24T05:39:15.794Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;23&#x2F;App%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87%E4%B8%8E%E4%BC%98%E5%8C%96%E7%9A%84%E6%96%B9%E6%A1%88&#x2F;rendering.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/11/23/App性能提升与优化的方案/"/>
+
+
+
+
+
+  <title>App性能提升与优化的方案 | YoU1024</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">YoU1024</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">严肃、活泼、团结、紧张</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/23/App%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87%E4%B8%8E%E4%BC%98%E5%8C%96%E7%9A%84%E6%96%B9%E6%A1%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YoU1024">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YoU1024">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">App性能提升与优化的方案</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-23T19:13:23+08:00">
+                2019-11-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>屏幕上显示的内容，是由CPU和GPU一起协作完成的。</p>
+<a id="more"></a>
+<h1 id="思考"><a href="#思考" class="headerlink" title="思考:"></a>思考:</h1><ol>
+<li>项目如何优化内存？从哪几方面着手？</li>
+<li>列表卡顿的原因？解决方案？</li>
+</ol>
+<hr>
+<h1 id="屏幕显示原理"><a href="#屏幕显示原理" class="headerlink" title="屏幕显示原理"></a>屏幕显示原理</h1><p>屏幕上显示的内容，是由CPU和GPU一起协作完成的。</p>
+<p>CPU(<code>Central Processing Unit</code>，中央处理器)负责对象的创建和销毁、对象属性的调整、布局计算、文本计算和排版、图片的解码和格式转换、图像的绘制（<code>Core Graphics</code>）等工作。</p>
+<p>GPU(<code>Graphics Processing Unit</code>，图形处理器)负责纹理的渲染</p>
+<p><img src="/2019/11/23/App%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87%E4%B8%8E%E4%BC%98%E5%8C%96%E7%9A%84%E6%96%B9%E6%A1%88/rendering.png" alt></p>
+<ul>
+<li>计算：包括文字的大小、颜色、位置、排版、图片的解码等操作，计算好以后提交给GPU</li>
+<li>渲染：只有经过渲染的内容才会显示在屏幕上（单单经过CPU计算的数据我们不能直接就看到的）。渲染完成后的数据以帧的形式存放在帧缓存区</li>
+<li>帧缓存：iOS是双缓存机制，有两块缓存区（前帧缓存、后帧缓存），效率比单缓存高</li>
+<li>视频控制器：从缓存区读取数据，显示到屏幕</li>
+</ul>
+<hr>
+<h1 id="卡顿产生的原因"><a href="#卡顿产生的原因" class="headerlink" title="卡顿产生的原因"></a>卡顿产生的原因</h1><p><img src="/2019/11/23/App%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87%E4%B8%8E%E4%BC%98%E5%8C%96%E7%9A%84%E6%96%B9%E6%A1%88/sync.png" alt></p>
+<p>显示器会以固定频率进行刷新。当VSync（垂直同步信号）到来，电子枪便开始绘制一帧新的画面，每来一个HSync（水平同步信号），便绘制一行，当最后一个HSync到来，完成一帧的绘制，电子枪回复到原位，准备画下一帧前，显示器会发出一个新的VSync。</p>
+<p><img src="/2019/11/23/App%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87%E4%B8%8E%E4%BC%98%E5%8C%96%E7%9A%84%E6%96%B9%E6%A1%88/%E5%8D%A1%E9%A1%BF%E5%8E%9F%E5%9B%A0%E7%AE%AD%E5%A4%B4%E5%9B%BE.png" alt></p>
+<p>App 主线程开始在 CPU 中计算显示内容（比如视图的创建、布局计算、图片解码、文本绘制等）<br>并把计算结果提交给 GPU 去渲染。随后 GPU 会把渲染结果提交到帧缓冲区，等待下一次 VSync 信号到来时显示到屏幕上。由于垂直同步的机制，如果在一个 VSync 时间内，CPU 或者 GPU 没有完成内容提交，则那一帧就会被丢弃，等待下一次机会再显示，而这时显示屏会保留之前的内容不变。于是界面卡顿，俗称掉帧。</p>
+<p>从上面的图中可以看到，CPU 和 GPU 不论哪个阻碍了显示流程，都会造成掉帧现象。</p>
+<p>因此，解决卡顿的思路就很明了了：对它们分别进行压力评估和优化，尽可能的减少CPU、GPU资源消耗。</p>
+<blockquote>
+<p>注：iPhone帧率是60FPS，VSync每16ms来一次（1000ms / 60fps = 16ms）</p>
+</blockquote>
+<hr>
+<h1 id="优化CPU"><a href="#优化CPU" class="headerlink" title="优化CPU"></a>优化CPU</h1><ul>
+<li>尽量用轻量级的对象<ul>
+<li>比如用不到事件处理的地方，可以考虑使用CALayer取代UIView</li>
+<li>能用基本数据类型的地方，不用对象型数据</li>
+<li>纯代码替代<code>Storyboard</code>、<code>Xib</code></li>
+</ul>
+</li>
+<li>不要频繁地调用<code>UIView</code>的相关属性<ul>
+<li>比如<code>frame</code>、<code>bounds</code>、<code>transform</code>等属性</li>
+<li>避免不必要的修改（调整层次、添加和移除）</li>
+</ul>
+</li>
+<li>尽量提前计算好布局，在有需要时一次性调整对应的属性，不要多次修改属性</li>
+<li><code>Autolayout</code>会比直接设置frame消耗更多的CPU资源<ul>
+<li><code>Autolayout</code>性能消耗随视图数量呈指<a href="http://pilky.me/36/" target="_blank" rel="noopener">数级上升</a></li>
+</ul>
+</li>
+<li>图片的size最好刚好跟<code>UIImageView</code>的<code>size</code>保持一致<ul>
+<li>图片的伸缩操作也会消耗资源</li>
+</ul>
+</li>
+<li>控制一下线程的最大并发数量<ul>
+<li>CPU是按照时间片轮转的方式分配资源，如果子线程数量巨大，会挤占主线程</li>
+</ul>
+</li>
+<li>尽量把耗时的操作放到子线程<ul>
+<li>现在的手机一般是多核（<code>iPhone 6s</code>开始已经是4核）</li>
+<li>充分利用多核的优势</li>
+<li>文本处理（尺寸计算、绘制）（见下方代码）</li>
+<li>图片处理（解码、绘制）（见下方代码）</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># 可以放到子线程处理的事件：</span></span><br><span class="line">    <span class="comment">// 文字计算</span></span><br><span class="line">    [<span class="string">@"text"</span> boundingRectWithSize:<span class="built_in">CGSizeMake</span>(<span class="number">100</span>, MAXFLOAT) options:<span class="built_in">NSStringDrawingUsesLineFragmentOrigin</span> attributes:<span class="literal">nil</span> context:<span class="literal">nil</span>];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 文字绘制</span></span><br><span class="line">    [<span class="string">@"text"</span> drawWithRect:<span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">100</span>, <span class="number">100</span>) options:<span class="built_in">NSStringDrawingUsesLineFragmentOrigin</span> attributes:<span class="literal">nil</span> context:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure>
+<p>图片的加载平时一般是这样操作：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">UIImageView</span> *imageView = [[<span class="built_in">UIImageView</span> alloc] init];</span><br><span class="line">imageView.frame = <span class="built_in">CGRectMake</span>(<span class="number">100</span>, <span class="number">100</span>, <span class="number">100</span>, <span class="number">56</span>);</span><br><span class="line">imageView.image = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"timg"</span>];</span><br><span class="line">[<span class="keyword">self</span>.view addSubview:imageView];</span><br><span class="line"><span class="keyword">self</span>.imageView = imageView;</span><br></pre></td></tr></table></figure>
+<p>其中<code>imageView.image = [UIImage imageNamed:@&quot;timg&quot;];</code>加载的是二进制数据，还需要经过解码才能绘制，如果图片比较大，耗时就长。</p>
+<p>如果对性能有极致追求，使用下面的方法可以让解码操作在子线程完成。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">    <span class="built_in">UIImageView</span> *imageView = [[<span class="built_in">UIImageView</span> alloc] init];</span><br><span class="line">    imageView.frame = <span class="built_in">CGRectMake</span>(<span class="number">100</span>, <span class="number">100</span>, <span class="number">100</span>, <span class="number">56</span>);</span><br><span class="line">    <span class="comment">// 对比上面的代码，这里没有加载图片了</span></span><br><span class="line">    [<span class="keyword">self</span>.view addSubview:imageView];</span><br><span class="line">    <span class="keyword">self</span>.imageView = imageView;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">dispatch_async</span>(dispatch_get_global_queue(<span class="number">0</span>, <span class="number">0</span>), ^&#123;</span><br><span class="line">        <span class="comment">// 获取CGImage</span></span><br><span class="line">        <span class="built_in">CGImageRef</span> cgImage;</span><br><span class="line"><span class="meta">#ifdef local</span></span><br><span class="line">        cgImage = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"timg"</span>].CGImage;</span><br><span class="line"><span class="meta">#else // 来自网络</span></span><br><span class="line">        cgImage = [<span class="built_in">UIImage</span> imageWithData:[<span class="built_in">NSData</span> dataWithContentsOfURL:[<span class="built_in">NSURL</span> URLWithString:<span class="string">@"xxx"</span>]]].CGImage;</span><br><span class="line"><span class="meta">#endif</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// alphaInfo</span></span><br><span class="line">        <span class="built_in">CGImageAlphaInfo</span> alphaInfo = <span class="built_in">CGImageGetAlphaInfo</span>(cgImage) &amp; kCGBitmapAlphaInfoMask;</span><br><span class="line">        <span class="built_in">BOOL</span> hasAlpha = <span class="literal">NO</span>;</span><br><span class="line">        <span class="keyword">if</span> (alphaInfo == kCGImageAlphaPremultipliedLast ||</span><br><span class="line">            alphaInfo == kCGImageAlphaPremultipliedFirst ||</span><br><span class="line">            alphaInfo == kCGImageAlphaLast ||</span><br><span class="line">            alphaInfo == kCGImageAlphaFirst) &#123;</span><br><span class="line">            hasAlpha = <span class="literal">YES</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// bitmapInfo</span></span><br><span class="line">        <span class="built_in">CGBitmapInfo</span> bitmapInfo = kCGBitmapByteOrder32Host;</span><br><span class="line">        bitmapInfo |= hasAlpha ? kCGImageAlphaPremultipliedFirst : kCGImageAlphaNoneSkipFirst;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// size</span></span><br><span class="line">        size_t width = <span class="built_in">CGImageGetWidth</span>(cgImage);</span><br><span class="line">        size_t height = <span class="built_in">CGImageGetHeight</span>(cgImage);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// context</span></span><br><span class="line">        <span class="built_in">CGContextRef</span> context = <span class="built_in">CGBitmapContextCreate</span>(<span class="literal">NULL</span>, width, height, <span class="number">8</span>, <span class="number">0</span>, <span class="built_in">CGColorSpaceCreateDeviceRGB</span>(), bitmapInfo);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// draw</span></span><br><span class="line">        <span class="built_in">CGContextDrawImage</span>(context, <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, width, height), cgImage);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// get CGImage</span></span><br><span class="line">        cgImage = <span class="built_in">CGBitmapContextCreateImage</span>(context);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// into UIImage</span></span><br><span class="line">        <span class="built_in">UIImage</span> *newImage = [<span class="built_in">UIImage</span> imageWithCGImage:cgImage];</span><br><span class="line"></span><br><span class="line">        <span class="comment">// release</span></span><br><span class="line">        <span class="built_in">CGContextRelease</span>(context);</span><br><span class="line">        <span class="built_in">CGImageRelease</span>(cgImage);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// back to the main thread</span></span><br><span class="line">        <span class="built_in">dispatch_async</span>(dispatch_get_main_queue(), ^&#123;</span><br><span class="line">            <span class="keyword">self</span>.imageView.image = newImage;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>很多<a href="https://github.com/SDWebImage/SDWebImage/search?q=SDImageCoderHelper&unscoped_q=SDImageCoderHelper" target="_blank" rel="noopener">框架</a>都自带异步解码的功能，其中解码的步骤在<code>context</code>这个位图上下文开始，<code>imageWithCGImage:</code>拿到的图片是已经解码的图片。</p>
+<hr>
+<h1 id="优化GPU"><a href="#优化GPU" class="headerlink" title="优化GPU"></a>优化GPU</h1><ul>
+<li>尽量避免短时间内大量图片的显示，尽可能将多张图片合成一张进行显示</li>
+<li>GPU能处理的最大纹理尺寸是<code>4096x4096</code>，一旦超过这个尺寸，就会占用CPU资源进行处理，所以纹理尽量不要超过这个尺寸</li>
+<li>尽量减少视图数量和层次<ul>
+<li>能合成一张就一张，分成多张独立的渲染，多个资源开销会增加消耗</li>
+</ul>
+</li>
+<li>减少透明的视图（alpha&lt;1），不透明的就设置<code>opaque</code>为<code>YES</code><ul>
+<li>透明的图片会增加GPU的混合计算，因为这涉及到颜色的叠加效果</li>
+</ul>
+</li>
+<li>尽量避免出现离屏渲染</li>
+</ul>
+<h4 id="离屏渲染"><a href="#离屏渲染" class="headerlink" title="离屏渲染"></a>离屏渲染</h4><p>在<code>OpenGL</code>中，GPU有两种渲染方式，当屏渲染(<code>On-Screen Rending</code>)和离屏渲染(<code>Off-Screen Rending</code>)。</p>
+<p>当屏渲染在当前用于显示的屏幕缓存区进行渲染操作。</p>
+<p>离屏渲染在当前屏幕缓存区之外，新开辟一个缓存区进行渲染操作。这个缓存区的帧不能直接显示在屏幕，还需要切换上下文。离屏渲染的整个过程，先是从当前屏幕（<code>On-Screen</code>）切换到离屏（<code>Off-Screen</code>）；等到离屏渲染结束以后，将离屏缓冲区的渲染结果显示到屏幕上，又需要将上下文环境从离屏切换到当前屏幕，如此多次切换上下文环境才能把当屏和离屏的数据完成渲染。</p>
+<p>此外，创建新的缓冲区本身也消耗了部分性能。</p>
+<p>触发离屏渲染是因为有些操作比较消耗性能资源。</p>
+<h4 id="触发离屏渲染的操作"><a href="#触发离屏渲染的操作" class="headerlink" title="触发离屏渲染的操作"></a>触发离屏渲染的操作</h4><ul>
+<li>光栅化：<code>layer.shouldRasterize = YES</code></li>
+<li>遮罩：<code>layer.mask = YES</code></li>
+<li>圆角：<code>layer.maskToBounds = YES</code> &amp;&amp; <code>layer.cornerRadius &gt; 0</code><ul>
+<li>替代方案：</li>
+<li>使用<code>CoreGraphics</code></li>
+<li>美工提供圆角图片</li>
+</ul>
+</li>
+<li>阴影：<code>layer.shadowXXX</code> (例：<code>shadowColor/shadowPath/shadowOpacity</code>…)</li>
+<li>如果设置了<code>shadowPath</code>就不会产生离屏渲染</li>
+</ul>
+<hr>
+<h1 id="卡顿监测原理"><a href="#卡顿监测原理" class="headerlink" title="卡顿监测原理"></a>卡顿监测原理</h1><p>这里的卡顿是指，主线程执行了耗时的操作。</p>
+<p>监测思路是添加<code>Observer</code>到主线程的<code>runloop</code>中，监听rl状态切换的耗时，判断是否卡顿。</p>
+<p><img src="/2019/11/23/App%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87%E4%B8%8E%E4%BC%98%E5%8C%96%E7%9A%84%E6%96%B9%E6%A1%88/runloop%E8%BF%90%E8%A1%8C%E9%80%BB%E8%BE%91.png" alt><br>主线程的大部分操作（例如点击事件处理、<code>view</code>的绘制）基本是在<code>source0</code>和<code>source1</code>处理，因此，监听<code>Obervers</code>从结束休眠，经过处理<code>source1</code>，到绕回来处理<code>source0</code>，计算中间经历的时间（8-9-10-2-3-4-5）。也可监测哪个方法耗时比较长。</p>
+<p>网上已有优秀的开源框架<a href="https://github.com/UIControl/LXDAppFluecyMonitor" target="_blank" rel="noopener">LXDAppFluecyMonitor</a>，支持监测和打印卡顿的函数堆栈。<br>核心步骤如下：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)startMonitoring &#123;</span><br><span class="line">    <span class="keyword">if</span> (_isMonitoring) &#123; <span class="keyword">return</span>; &#125;</span><br><span class="line">    _isMonitoring = <span class="literal">YES</span>;</span><br><span class="line">    <span class="built_in">CFRunLoopObserverContext</span> context = &#123;</span><br><span class="line">        <span class="number">0</span>,</span><br><span class="line">        (__bridge <span class="keyword">void</span> *)<span class="keyword">self</span>,</span><br><span class="line">        <span class="literal">NULL</span>,</span><br><span class="line">        <span class="literal">NULL</span></span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 添加rOberser到主线程的runloop中</span></span><br><span class="line">    _observer = <span class="built_in">CFRunLoopObserverCreate</span>(kCFAllocatorDefault, kCFRunLoopAllActivities, <span class="literal">YES</span>, <span class="number">0</span>, &amp;lxdRunLoopObserverCallback, &amp;context);</span><br><span class="line">    <span class="built_in">CFRunLoopAddObserver</span>(<span class="built_in">CFRunLoopGetMain</span>(), _observer, kCFRunLoopCommonModes);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 监听runloop状态为[before waiting]状态下是否卡顿</span></span><br><span class="line">    <span class="built_in">dispatch_async</span>(lxd_event_monitor_queue(), ^&#123;</span><br><span class="line">        <span class="keyword">while</span> (SHAREDMONITOR.isMonitoring) &#123;</span><br><span class="line">            <span class="keyword">if</span> (SHAREDMONITOR.currentActivity == kCFRunLoopBeforeWaiting) &#123;</span><br><span class="line">                __block <span class="built_in">BOOL</span> timeOut = <span class="literal">YES</span>;</span><br><span class="line">                <span class="built_in">dispatch_async</span>(dispatch_get_main_queue(), ^&#123;</span><br><span class="line">                    timeOut = <span class="literal">NO</span>;</span><br><span class="line">                    dispatch_semaphore_signal(SHAREDMONITOR.eventSemphore);</span><br><span class="line">                &#125;);</span><br><span class="line">                [<span class="built_in">NSThread</span> sleepForTimeInterval: lxd_time_out_interval];</span><br><span class="line">                <span class="keyword">if</span> (timeOut) &#123;</span><br><span class="line">                    [LXDBacktraceLogger lxd_logMain];</span><br><span class="line">                &#125;</span><br><span class="line">                dispatch_wait(SHAREDMONITOR.eventSemphore, DISPATCH_TIME_FOREVER);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 监听runloop状态在 [after waiting] 和 [before sources] 之间</span></span><br><span class="line">    <span class="built_in">dispatch_async</span>(lxd_fluecy_monitor_queue(), ^&#123;</span><br><span class="line">        <span class="keyword">while</span> (SHAREDMONITOR.isMonitoring) &#123;</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// lxd_wait_interval（单次卡顿的时间间隔）这里设定是200ms</span></span><br><span class="line">            <span class="keyword">long</span> waitTime = dispatch_semaphore_wait(<span class="keyword">self</span>.semphore, dispatch_time(DISPATCH_TIME_NOW, lxd_wait_interval));</span><br><span class="line">            <span class="keyword">if</span> (waitTime != LXD_SEMPHORE_SUCCESS) &#123;</span><br><span class="line">                <span class="keyword">if</span> (!SHAREDMONITOR.observer) &#123;</span><br><span class="line">                    SHAREDMONITOR.timeOut = <span class="number">0</span>;</span><br><span class="line">                    [SHAREDMONITOR stopMonitoring];</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (SHAREDMONITOR.currentActivity == kCFRunLoopBeforeSources || SHAREDMONITOR.currentActivity == kCFRunLoopAfterWaiting) &#123;</span><br><span class="line">                    <span class="comment">// 连续超时5次，即判定为卡顿出现</span></span><br><span class="line">                    <span class="keyword">if</span> (++SHAREDMONITOR.timeOut &lt; <span class="number">5</span>) &#123;</span><br><span class="line">                        <span class="keyword">continue</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    </span><br><span class="line">                    <span class="comment">// 输出卡顿的【线程堆栈上下文】</span></span><br><span class="line">                    [LXDBacktraceLogger lxd_logMain];</span><br><span class="line">                    [<span class="built_in">NSThread</span> sleepForTimeInterval: lxd_restore_interval];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            SHAREDMONITOR.timeOut = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里设定单次<code>runloop</code>的时长超过200ms、连续5次超过，即判断为卡顿，实际开发可以根据需求调整判断条件。</p>
+<hr>
+<h1 id="tableView卡顿的原因vs解决"><a href="#tableView卡顿的原因vs解决" class="headerlink" title="tableView卡顿的原因vs解决"></a>tableView卡顿的原因vs解决</h1><ul>
+<li>当在较短时间显示大量图片时（比如 TableView 存在非常多的图片并且快速滑动时），CPU 占用率很低，GPU 占用非常高，界面仍然会掉帧。<ul>
+<li>避免这种情况的方法只能是尽量减少在短时间内大量图片的显示，尽可能将多张图片合成为一张进行显示</li>
+</ul>
+</li>
+<li>预排版<ul>
+<li>提前在后台计算好布局结果(内部每个控件的高度、Cell 的整体高度)，全部缓存到内存，以供稍后使用</li>
+<li>如果对性能的要求并不那么高，可以尝试用 TableView 的预估高度的功能，并把每个 Cell 高度缓存下来（见<a href="https://github.com/forkingdog/UITableView-FDTemplateLayoutCell/" target="_blank" rel="noopener">FDTemplateLayoutCell</a>）</li>
+</ul>
+</li>
+<li>预渲染<ul>
+<li>为了避免离屏渲染，尽量避免使用 layer 的 border、corner、shadow、mask 等技术，而尽量在后台线程预先绘制好对应内容</li>
+</ul>
+</li>
+<li>异步绘制<ul>
+<li>当 <code>TableView</code> 快速滑动时，会有大量异步绘制任务提交到后台线程去执行。但是有时滑动速度过快时，绘制任务还没有完成就可能已经被取消了。如果这时仍然继续绘制，就会造成大量的 CPU 资源浪费，甚至阻塞线程并造成后续的绘制任务迟迟无法完成。</li>
+<li>解决：尽量快速、提前判断当前绘制任务是否已经被取消；在绘制每一行文本前，都调用 <code>isCancelled()</code> 来进行判断，保证被取消的任务能及时退出，不至于影响后续操作（见<a href="https://github.com/ibireme/YYAsyncLayer" target="_blank" rel="noopener">YYAsyncLayer</a>）</li>
+</ul>
+</li>
+<li>全局并发控制<ul>
+<li>大量的任务提交到后台队列时，某些任务会因为某些原因被锁住导致线程休眠，或者被阻塞，<code>concurrent queue</code> 随后会创建新的线程来执行其他任务。当这种情况变多时，或者 App 中使用了大量 <code>concurrent queue</code> 来执行较多任务时，App 在同一时刻就会存在几十个线程同时运行、创建、销毁。这些操作仍然会挤占掉主线程的 CPU 资源。 </li>
+<li>解决： 把 App 内所有异步操作，包括图像解码、对象释放、异步绘制等，都按优先级不同放入全局的 <code>serial queue</code> 中执行，这样尽量避免了过多线程导致的性能问题（见<a href="https://github.com/ibireme/YYDispatchQueuePool" target="_blank" rel="noopener">YYDispatchQueuePool</a>）</li>
+</ul>
+</li>
+<li>更高效的异步图片加载 <ul>
+<li>显示简单的单张图片时，使用<code>UIView.layer.contents</code>，没必要使用 <code>UIImageView</code> 带来额外的资源消耗</li>
+</ul>
+</li>
+</ul>
+<h1 id="如何评测界面的流畅度"><a href="#如何评测界面的流畅度" class="headerlink" title="如何评测界面的流畅度"></a>如何评测界面的流畅度</h1><ul>
+<li><code>Instuments</code><ul>
+<li>它的<code>GPU Driver</code>预设，能够实时查看到 CPU 和 GPU 的资源消耗。在这个预设内，能查看到几乎所有与显示有关的数据，比如 <code>Texture</code> 数量、CA 提交的频率、GPU 消耗等，在定位界面卡顿的问题时，这是最好的工具</li>
+</ul>
+</li>
+<li>FPS 指示器<ul>
+<li>用 <code>CADisplayLink</code>实时监视 CPU 的卡顿</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="Res-Link"><a href="#Res-Link" class="headerlink" title="Res Link"></a>Res Link</h1><ul>
+<li><a href="https://blog.ibireme.com/2015/11/12/smooth_user_interfaces_for_ios/" target="_blank" rel="noopener">iOS 保持界面流畅的技巧</a></li>
+<li><a href="https://github.com/skyming/iOS-Performance-Optimization" target="_blank" rel="noopener">iOS-Performance-Optimization（集合）</a></li>
+<li><a href="http://blog.leichunfeng.com/blog/2017/02/20/talking-about-the-decompression-of-the-image-in-ios/" target="_blank" rel="noopener">谈谈 iOS 中图片的解压缩（雷纯峰）</a></li>
+<li><a href="https://github.com/UIControl/LXDAppFluecyMonitor" target="_blank" rel="noopener">LXDAppFluecyMonitor</a></li>
+<li><a href="https://github.com/SDWebImage/SDWebImage" target="_blank" rel="noopener">SDWebImage</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" rel="tag"># 性能优化</a>
+          
+            <a href="/tags/%E5%8D%A1%E9%A1%BF%E7%9B%91%E6%B5%8B/" rel="tag"># 卡顿监测</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/23/%E7%BB%84%E4%BB%B6%E5%8C%96-iOS%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1%E6%96%B9%E6%A1%88/" rel="next" title="组件化-iOS组件通信方案">
+                <i class="fa fa-chevron-left"></i> 组件化-iOS组件通信方案
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/11/23/App%E4%BC%98%E5%8C%96%E4%B9%8B%E5%90%AF%E5%8A%A8%E9%80%9F%E5%BA%A6%E3%80%81%E7%98%A6%E8%BA%AB%E3%80%81%E8%80%97%E7%94%B5%E5%A4%84%E7%90%86/" rel="prev" title="App优化之启动速度、瘦身、耗电处理">
+                App优化之启动速度、瘦身、耗电处理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">YoU1024</p>
+              <p class="site-description motion-element" itemprop="description">命运对勇士说/暴风雨要来了/勇士低语/我就是暴风雨</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#思考"><span class="nav-number">1.</span> <span class="nav-text">思考:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#屏幕显示原理"><span class="nav-number">2.</span> <span class="nav-text">屏幕显示原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#卡顿产生的原因"><span class="nav-number">3.</span> <span class="nav-text">卡顿产生的原因</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#优化CPU"><span class="nav-number">4.</span> <span class="nav-text">优化CPU</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#优化GPU"><span class="nav-number">5.</span> <span class="nav-text">优化GPU</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#离屏渲染"><span class="nav-number">5.0.0.1.</span> <span class="nav-text">离屏渲染</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#触发离屏渲染的操作"><span class="nav-number">5.0.0.2.</span> <span class="nav-text">触发离屏渲染的操作</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#卡顿监测原理"><span class="nav-number">6.</span> <span class="nav-text">卡顿监测原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#tableView卡顿的原因vs解决"><span class="nav-number">7.</span> <span class="nav-text">tableView卡顿的原因vs解决</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何评测界面的流畅度"><span class="nav-number">8.</span> <span class="nav-text">如何评测界面的流畅度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Res-Link"><span class="nav-number">9.</span> <span class="nav-text">Res Link</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">YoU1024</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

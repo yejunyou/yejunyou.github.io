@@ -84,13 +84,13 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="汇编基础-1">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;19&#x2F;%E6%B1%87%E7%BC%96%E5%9F%BA%E7%A1%80-1&#x2F;index.html">
-<meta property="og:site_name" content="you1024">
+<meta property="og:site_name" content="YoU1024">
 <meta property="og:description" content="汇编的知识点比较杂且多，为方便梳理，整理成思维导图：">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;19&#x2F;%E6%B1%87%E7%BC%96%E5%9F%BA%E7%A1%80-1&#x2F;8086%E6%B1%87%E7%BC%96%E5%9F%BA%E7%A1%801.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;19&#x2F;%E6%B1%87%E7%BC%96%E5%9F%BA%E7%A1%80-1&#x2F;8086%E6%B1%87%E7%BC%96%E5%9F%BA%E7%A1%802.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;19&#x2F;%E6%B1%87%E7%BC%96%E5%9F%BA%E7%A1%80-1&#x2F;8086%E6%B1%87%E7%BC%96%E5%9F%BA%E7%A1%803.png">
-<meta property="og:updated_time" content="2019-11-19T08:16:25.570Z">
+<meta property="og:updated_time" content="2019-11-22T22:53:24.341Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;19&#x2F;%E6%B1%87%E7%BC%96%E5%9F%BA%E7%A1%80-1&#x2F;8086%E6%B1%87%E7%BC%96%E5%9F%BA%E7%A1%801.png">
 
@@ -128,7 +128,7 @@
 
 
 
-  <title>汇编基础-1 | you1024</title>
+  <title>汇编基础-1 | YoU1024</title>
   
 
 
@@ -158,7 +158,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">you1024</span>
+        <span class="site-title">YoU1024</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -238,13 +238,13 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/19/%E6%B1%87%E7%BC%96%E5%9F%BA%E7%A1%80-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="you1024">
+      <meta itemprop="name" content="YoU1024">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="you1024">
+      <meta itemprop="name" content="YoU1024">
     </span>
 
     
@@ -308,35 +308,31 @@
 
 <p><img src="/2019/11/19/%E6%B1%87%E7%BC%96%E5%9F%BA%E7%A1%80-1/8086%E6%B1%87%E7%BC%96%E5%9F%BA%E7%A1%802.png" alt="汇编基础"></p>
 <p><img src="/2019/11/19/%E6%B1%87%E7%BC%96%E5%9F%BA%E7%A1%80-1/8086%E6%B1%87%E7%BC%96%E5%9F%BA%E7%A1%803.png" alt="汇编基础"></p>
-<ul>
-<li>语言发展<ul>
+<h1 id="语言发展"><a href="#语言发展" class="headerlink" title="语言发展"></a>语言发展</h1><ul>
 <li>机器语言</li>
 <li>汇编语言</li>
-<li>高级语言</li>
+<li>高级语言<ul>
+<li>编译与反编译的关系</li>
+<li>特点</li>
 </ul>
 </li>
-<li>编译与反编译的关系</li>
-<li>特点<ul>
 <li>直接访问、控制硬件</li>
 <li>和机器指令一一对应</li>
 <li>不区分大小写</li>
 </ul>
-</li>
-<li>分类<ul>
+<h1 id="汇编分类"><a href="#汇编分类" class="headerlink" title="汇编分类"></a>汇编分类</h1><ul>
 <li>8086</li>
 <li>AT&amp;T（Mac、iOS模拟器）</li>
 <li>ARM（切入式、iOS设备）</li>
 <li>Win32/Win64</li>
 <li>…</li>
 </ul>
-</li>
-<li>总线<ul>
+<h1 id="总线"><a href="#总线" class="headerlink" title="总线"></a>总线</h1><ul>
 <li>地址总线 AB：决定CPU的寻址能力</li>
 <li>数据总线 DB：决定CPU单次数据传送速度</li>
 <li>控制总线CB：决定对其他意见的控制种数</li>
 </ul>
-</li>
-<li>内存<ul>
+<h1 id="内存"><a href="#内存" class="headerlink" title="内存"></a>内存</h1><ul>
 <li>内存单元都有唯一的物理地址</li>
 <li>8086的内存大小：<ul>
 <li>2^20 = 1M (0x00000~0xFFFFF)</li>
@@ -346,8 +342,7 @@
 </ul>
 </li>
 </ul>
-</li>
-<li>寻址方式<ul>
+<h1 id="寻址方式"><a href="#寻址方式" class="headerlink" title="寻址方式"></a>寻址方式</h1><ul>
 <li>8086有20位地址总线，但是16位结构的CPU</li>
 <li>内部用2个16位地址合成1个20位的物理地址 = 段地址 x 16 + 偏移地址</li>
 <li>内存的分段管理<ul>
@@ -361,15 +356,12 @@
 </ul>
 </li>
 </ul>
-</li>
-<li>寄存器<ul>
+<h1 id="寄存器"><a href="#寄存器" class="headerlink" title="寄存器"></a>寄存器</h1><ul>
 <li>CPU典型构成<ul>
 <li>寄存器：信息储存</li>
 <li>运算器：信息处理</li>
 <li>控制器：控制其他器件工作</li>
-</ul>
-</li>
-<li>8086有14个寄存器<ul>
+<li>8086有14个寄存器</li>
 <li>通用寄存器<ul>
 <li>数据寄存器<ul>
 <li>AX：AH + AL</li>
@@ -418,15 +410,16 @@
 </ul>
 </li>
 </ul>
-</li>
-<li>指令<ul>
-<li>CS和IP<ul>
+<h1 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h1><ul>
+<li><p>CS和IP</p>
+<ul>
 <li>CS为代码段寄存器，IP为指令指针寄存器，它们指示了CPU当前要读取指令的地址</li>
 <li>任意时刻，8086CPU都会将CS:IP指向的指令作为下一条需要取出执行的指令</li>
 <li>CPU根据什么区分指令和数据</li>
 </ul>
 </li>
-<li>jmp指令<ul>
+<li><p>jmp指令</p>
+<ul>
 <li>统称转义指令</li>
 <li>格式:<ul>
 <li>jmp 段地址：偏移地址（jmp CS：IP）</li>
@@ -436,12 +429,14 @@
 </li>
 </ul>
 </li>
-<li>DS和[address]<ul>
+<li><p>DS和[address]</p>
+<ul>
 <li>读写内存单元时，写给内存单元的地址</li>
 <li>8086不支持直接将数据送入段寄存器（DS）</li>
 </ul>
 </li>
-<li>mov指令<ul>
+<li><p>mov指令</p>
+<ul>
 <li>mov 寄存器，数据</li>
 <li>mov 寄存器，寄存器</li>
 <li>mov 寄存器，内存单元</li>
@@ -451,39 +446,27 @@
 <li>不支持 mov 内存单元，内存单元</li>
 </ul>
 </li>
-<li>add和sub</li>
-</ul>
-</li>
-<li>栈<ul>
-<li>存储空间，LIFO</li>
-<li>SS作为栈段的段地址，任意时刻，SS：SP指向栈顶元素</li>
-<li>8086提供了POP和PUSH操作，8086中push和pop操作都是2个字节</li>
-<li>push ax操作过程：<ul>
-<li>sp = sp - 2</li>
-<li>把ax中的内容送入ss：sp指向的内存单元</li>
-</ul>
-</li>
-<li>pop ax操作过程<ul>
-<li>把ss：sp指向的内存单元送入到ax</li>
-<li>sp = sp+2</li>
-</ul>
-</li>
-<li>练习：<ul>
-<li>交换2个元素</li>
-<li>逆序复制</li>
-</ul>
+<li><p>add和sub</p>
 </li>
 </ul>
-</li>
-<li>编写完整的汇编程序<ul>
+<h1 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h1><pre><code>- 存储空间，LIFO
+- SS作为栈段的段地址，任意时刻，SS：SP指向栈顶元素
+- 8086提供了POP和PUSH操作，8086中push和pop操作都是2个字节
+- push ax操作过程：
+  - sp = sp - 2
+  - 把ax中的内容送入ss：sp指向的内存单元
+- pop ax操作过程
+  - 把ss：sp指向的内存单元送入到ax
+  - sp = sp+2
+- ex：
+  - 交换2个元素
+  - 逆序复制</code></pre><h1 id="完整的汇编程序"><a href="#完整的汇编程序" class="headerlink" title="完整的汇编程序"></a>完整的汇编程序</h1><ul>
 <li>汇编语言的组成<ul>
 <li>汇编指令：有对应的机器指令，被CPU执行</li>
 <li>伪指令：无对应的机器指令，不被CPU执行</li>
 </ul>
 </li>
 <li>注释以分号；开头</li>
-</ul>
-</li>
 </ul>
 
       
@@ -579,13 +562,22 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <p class="site-author-name" itemprop="name">you1024</p>
-              <p class="site-description motion-element" itemprop="description">勇士低语/我就是暴风雨</p>
+              <p class="site-author-name" itemprop="name">YoU1024</p>
+              <p class="site-description motion-element" itemprop="description">命运对勇士说/暴风雨要来了/勇士低语/我就是暴风雨</p>
           </div>
 
           <nav class="site-state motion-element">
@@ -595,7 +587,7 @@
               
                 <a href="/archives/%20%7C%7C%20archive">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -608,7 +600,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
@@ -632,6 +624,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#语言发展"><span class="nav-number">1.</span> <span class="nav-text">语言发展</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#汇编分类"><span class="nav-number">2.</span> <span class="nav-text">汇编分类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总线"><span class="nav-number">3.</span> <span class="nav-text">总线</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#内存"><span class="nav-number">4.</span> <span class="nav-text">内存</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#寻址方式"><span class="nav-number">5.</span> <span class="nav-text">寻址方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#寄存器"><span class="nav-number">6.</span> <span class="nav-text">寄存器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#指令"><span class="nav-number">7.</span> <span class="nav-text">指令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#栈"><span class="nav-number">8.</span> <span class="nav-text">栈</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#完整的汇编程序"><span class="nav-number">9.</span> <span class="nav-text">完整的汇编程序</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -649,7 +657,7 @@
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">you1024</span>
+  <span class="author" itemprop="copyrightHolder">YoU1024</span>
 
   
 </div>
