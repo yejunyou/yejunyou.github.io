@@ -88,7 +88,7 @@
 <meta property="og:description" content="业务模块化架构设计，可以达到明确模块职责及边界，提升代码质量，减少复杂依赖，优化编译速度，提升开发效率等效果 设计模式 vs 架构设计App 架构设计更多强调的是分层，基于设计模式六大原则之一的单一职责原则，将系统划分为基础层，网络层，UI层等等，以便于维护和扩展. 设计模式的范畴比架构设计小，强调的是类与类之间的关系。而架构可大可小，小到类之间的关系、大到模块之间、CS之间的设计。 !&amp;lt;–">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;23&#x2F;%E7%BB%84%E4%BB%B6%E5%8C%96-iOS%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1%E6%96%B9%E6%A1%88&#x2F;%E6%9E%B6%E6%9E%84%E5%88%86%E5%B1%82%E8%AE%BE%E8%AE%A1yy.png">
-<meta property="og:updated_time" content="2019-11-23T09:40:25.646Z">
+<meta property="og:updated_time" content="2019-11-26T12:33:24.688Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;23&#x2F;%E7%BB%84%E4%BB%B6%E5%8C%96-iOS%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1%E6%96%B9%E6%A1%88&#x2F;%E6%9E%B6%E6%9E%84%E5%88%86%E5%B1%82%E8%AE%BE%E8%AE%A1yy.png">
 
@@ -305,6 +305,7 @@
 <p>设计模式的范畴比架构设计小，强调的是类与类之间的关系。<br>而架构可大可小，小到类之间的关系、大到模块之间、CS之间的设计。</p>
 <p>!&lt;–more–&gt;</p>
 <h1 id="1-架构分层设计"><a href="#1-架构分层设计" class="headerlink" title="1. 架构分层设计"></a>1. 架构分层设计</h1><p><img src="/2019/11/23/%E7%BB%84%E4%BB%B6%E5%8C%96-iOS%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1%E6%96%B9%E6%A1%88/%E6%9E%B6%E6%9E%84%E5%88%86%E5%B1%82%E8%AE%BE%E8%AE%A1yy.png" alt></p>
+<p>以上是快乐平安App的主要架构，主要划分为4层，目前有3个项目共用了除基础层之外的其他层。</p>
 <ul>
 <li>基础层：<ul>
 <li>这里放一些基础的、与业务无关的公共组件，尽量用第三方的通用组件。</li>
@@ -474,7 +475,11 @@
 
 <h5 id="基于通知的广播方案"><a href="#基于通知的广播方案" class="headerlink" title="基于通知的广播方案"></a>基于通知的广播方案</h5><p>基于通知的模块间通讯方案，实现思路非常简单, 直接基于系统的 <code>NSNotificationCenter</code> 即可。优势是实现简单，非常适合处理一对多的通讯场景。劣势是仅适用于简单通讯场景。复杂数据传输，同步调用等方式都不太方便。模块化通讯方案中，更多的是把通知方案作为以上几种方案的补充。</p>
 <h1 id="Res-Link"><a href="#Res-Link" class="headerlink" title="Res Link"></a>Res Link</h1><ul>
-<li><a href="https://www.infoq.cn/article/BwVSA-aI2jVv4IRNOwps" target="_blank" rel="noopener">有赞移动 iOS 组件化（模块化）架构设计实践</a></li>
+<li><a href="http://pingguohe.net/2016/11/17/decouple-tmall-app.html" target="_blank" rel="noopener">手机天猫解耦之路</a></li>
+<li><a href="https://tech.meituan.com/2018/11/08/ios-category-module-communicate.html" target="_blank" rel="noopener">Category 特性在 iOS 组件化中的应用与管控-美团</a></li>
+<li><a href="http://wereadteam.github.io/archives/page/2/" target="_blank" rel="noopener">iOS 组件化方案探索-微信读书</a></li>
+<li><a href="https://casatwy.com/iOS-Modulization.html" target="_blank" rel="noopener">iOS应用架构谈 组件化方案-casa</a></li>
+<li><a href="https://www.infoq.cn/article/BwVSA-aI2jVv4IRNOwps" target="_blank" rel="noopener">移动 iOS 组件化（模块化）架构设计实践-有赞</a></li>
 <li><a href="https://tech.meituan.com/2018/11/08/ios-category-module-communicate.html" target="_blank" rel="noopener">Category 特性在 iOS 组件化中的应用与管控</a></li>
 <li><a href="https://www.jianshu.com/p/2af9c063fd85" target="_blank" rel="noopener">iOS 组件通信方案 </a></li>
 <li><a href="https://github.com/meili/MGJRouter" target="_blank" rel="noopener">蘑菇街</a></li>
