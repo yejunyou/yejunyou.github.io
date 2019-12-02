@@ -91,7 +91,7 @@
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;23&#x2F;App%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87%E4%B8%8E%E4%BC%98%E5%8C%96%E7%9A%84%E6%96%B9%E6%A1%88&#x2F;sync.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;23&#x2F;App%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87%E4%B8%8E%E4%BC%98%E5%8C%96%E7%9A%84%E6%96%B9%E6%A1%88&#x2F;%E5%8D%A1%E9%A1%BF%E5%8E%9F%E5%9B%A0%E7%AE%AD%E5%A4%B4%E5%9B%BE.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;23&#x2F;App%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87%E4%B8%8E%E4%BC%98%E5%8C%96%E7%9A%84%E6%96%B9%E6%A1%88&#x2F;runloop%E8%BF%90%E8%A1%8C%E9%80%BB%E8%BE%91.png">
-<meta property="og:updated_time" content="2019-11-26T12:28:41.899Z">
+<meta property="og:updated_time" content="2019-12-01T13:30:37.537Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;23&#x2F;App%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87%E4%B8%8E%E4%BC%98%E5%8C%96%E7%9A%84%E6%96%B9%E6%A1%88&#x2F;rendering.png">
 
@@ -403,6 +403,12 @@
 <li>阴影：<code>layer.shadowXXX</code> (例：<code>shadowColor/shadowPath/shadowOpacity</code>…)</li>
 <li>如果设置了<code>shadowPath</code>就不会产生离屏渲染</li>
 </ul>
+<p>查看离屏渲染区域：</p>
+<ul>
+<li>1、模拟器debug-选中color Offscreen - Renderd离屏渲染的图层高亮成黄，可能存在性能问题</li>
+<li>2、真机Instrument-选中Core Animation-勾选Color Offscreen-Rendered Yellow</li>
+</ul>
+<p>作者：全网iOS面试题总结<br>链接：<a href="https://www.jianshu.com/p/d7c5954dc6d6" target="_blank" rel="noopener">https://www.jianshu.com/p/d7c5954dc6d6</a><br>来源：简书<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
 <hr>
 <h1 id="卡顿监测原理"><a href="#卡顿监测原理" class="headerlink" title="卡顿监测原理"></a>卡顿监测原理</h1><p>这里的卡顿是指，主线程执行了耗时的操作。</p>
 <p>监测思路是添加<code>Observer</code>到主线程的<code>runloop</code>中，监听rl状态切换的耗时，判断是否卡顿。</p>
