@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="编译器," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="几个问题： 编译器和解释器的区别？各自优点？ 编译器成成汇编语言，而不是机器语言，好处是什么？ 把一种高级语言翻译成另一种高级语言（简称：源到源 source-to-source）的翻译器，编译器使用C语言作为目标语言的好处是什么？ 汇编器要完成的任务? 编译器的前端front end和后端back end是什么？ 编译器的各个步骤？分别干了什么？  下文将一一回答 语言处理器语言处理器有两种类型">
+<meta name="keywords" content="编译器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="编译器小记">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;12&#x2F;%E7%BC%96%E8%AF%91%E5%99%A8%E5%B0%8F%E8%AE%B0&#x2F;index.html">
+<meta property="og:site_name" content="you1024">
+<meta property="og:description" content="几个问题： 编译器和解释器的区别？各自优点？ 编译器成成汇编语言，而不是机器语言，好处是什么？ 把一种高级语言翻译成另一种高级语言（简称：源到源 source-to-source）的翻译器，编译器使用C语言作为目标语言的好处是什么？ 汇编器要完成的任务? 编译器的前端front end和后端back end是什么？ 编译器的各个步骤？分别干了什么？  下文将一一回答 语言处理器语言处理器有两种类型">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;12&#x2F;%E7%BC%96%E8%AF%91%E5%99%A8%E5%B0%8F%E8%AE%B0&#x2F;b1.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;12&#x2F;%E7%BC%96%E8%AF%91%E5%99%A8%E5%B0%8F%E8%AE%B0&#x2F;b2.JPG">
+<meta property="og:updated_time" content="2019-12-12T05:42:49.380Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;12&#x2F;%E7%BC%96%E8%AF%91%E5%99%A8%E5%B0%8F%E8%AE%B0&#x2F;b1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/12/12/编译器小记/"/>
+
+
+
+
+
+  <title>编译器小记 | you1024</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">you1024</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">献给所热爱的一切</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/12/%E7%BC%96%E8%AF%91%E5%99%A8%E5%B0%8F%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YoU1024">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="you1024">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">编译器小记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-12-12T13:34:50+08:00">
+                2019-12-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="几个问题："><a href="#几个问题：" class="headerlink" title="几个问题："></a>几个问题：</h3><ul>
+<li>编译器和解释器的区别？各自优点？</li>
+<li>编译器成成汇编语言，而不是机器语言，好处是什么？</li>
+<li>把一种高级语言翻译成另一种高级语言（简称：源到源 <code>source-to-source</code>）的翻译器，编译器使用C语言作为目标语言的好处是什么？</li>
+<li>汇编器要完成的任务?</li>
+<li>编译器的前端<code>front end</code>和后端<code>back end</code>是什么？</li>
+<li>编译器的各个步骤？分别干了什么？</li>
+</ul>
+<p>下文将一一回答</p>
+<h1 id="语言处理器"><a href="#语言处理器" class="headerlink" title="语言处理器"></a>语言处理器</h1><p>语言处理器有两种类型，分别是：</p>
+<ul>
+<li>编译器 compiler： 生成目标文件速度快</li>
+<li>解释器 interpreter ：错误诊断效果好</li>
+</ul>
+<p>编译器的作用：</p>
+<ul>
+<li>报告翻译过程中发现的错误</li>
+<li>把源程序翻译成「等价的」目标语言编写的「程序」</li>
+</ul>
+<p><img src="/2019/12/12/%E7%BC%96%E8%AF%91%E5%99%A8%E5%B0%8F%E8%AE%B0/b1.png" alt></p>
+<h1 id="一个编译器的结构"><a href="#一个编译器的结构" class="headerlink" title="一个编译器的结构"></a>一个编译器的结构</h1><p><img src="/2019/12/12/%E7%BC%96%E8%AF%91%E5%99%A8%E5%B0%8F%E8%AE%B0/b2.JPG" alt></p>
+<h2 id="1-词法分析"><a href="#1-词法分析" class="headerlink" title="1.词法分析"></a>1.词法分析</h2><p>词法分析（lexical annlysis）又叫扫描（canning），读入字符流，把他们组织成有意义的词素（lexeme）序列。<br>输入词素，经过词法分析器生成词法单元(token)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;token-name, attrbute-value&gt;</span><br></pre></td></tr></table></figure>
+<p>例如：<code>postion = initail + rate * 60</code>这个表达式：</p>
+<ul>
+<li><code>positin</code>是一个词素，映射成词法单元<code>&lt;id，1&gt;</code></li>
+<li><code>+</code>是一个词素，映射成词法单元<code>&lt;+&gt;</code></li>
+<li><code>rate</code>是一个词素，映射成词法单元<code>&lt;id，3&gt;</code></li>
+<li><code>*</code>是一个词素，映射成词法单元<code>&lt;*&gt;</code></li>
+</ul>
+<p>这里，id是标识符（identity）的抽象符号，后面的数字，表示对应的条目。条目存放了标识符的信息，例如它的名字、类型</p>
+<p>词法分析器最终输出是词法单元序列</p>
+<h2 id="2-语法分析"><a href="#2-语法分析" class="headerlink" title="2.语法分析"></a>2.语法分析</h2><p>语法分析（syntax analysis）又叫做解析（parsing），它会创建一个种树形结构，这个结构是一种代码的中间表示</p>
+<p>特点是结带点表示运算符，子结点表示运算符的分量。</p>
+<p>上图中，树的意思就是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">position = initial + rate * 60</span><br></pre></td></tr></table></figure>
+<p>可以看到，它确定了算术的优先级！</p>
+<h2 id="3-语义分析"><a href="#3-语义分析" class="headerlink" title="3.语义分析"></a>3.语义分析</h2><p>使用语法树+符号表的信息，check源程序的语义是否合法。<br>同时，它也收集类型信息，更新到语法树、符号表中（现在大概知道符号表怎么来的了吧~~）</p>
+<p>例如：</p>
+<ul>
+<li>自动类型转换：如果发现initial、rate都是浮点数，那么编译器会把60在处理一下（如图），相当于<code>60.0 = inttofloat(60)</code>，然后才把60.0交给<code>+</code>去运算。</li>
+<li>类型检查：数组的下标必须是整数，如果是浮点数，编译器就报错~~</li>
+</ul>
+<h2 id="4-中间代码生成"><a href="#4-中间代码生成" class="headerlink" title="4.中间代码生成"></a>4.中间代码生成</h2><p>一个编译器可以构造出很多个中间表示。中间表示可以有很多种形式。</p>
+<p>例如语法树、三地址代码等。</p>
+<p>这里的中间表示有两个重要性质：</p>
+<ul>
+<li>易于生成</li>
+<li>能够被轻松翻译成目标机器语言</li>
+</ul>
+<p> 编译器的最终产物是，输出明确的低级的或者类机器语言的中间表示。（可以理解为机器语言的抽象）</p>
+<p>例如：<br>三段地址代码的序列：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">t1 = inttofloat(60)</span><br><span class="line">t2 = id3 * t1</span><br><span class="line">t3 = id2 + t2</span><br><span class="line">id1 = t3</span><br></pre></td></tr></table></figure>
+<ul>
+<li>特征：右边最多只有一个运算符</li>
+<li>编译器生成一个临时名字存放计算结果</li>
+<li>运算分量可能少于3个（例：第1、3条计算）</li>
+</ul>
+<h2 id="5-代码优化"><a href="#5-代码优化" class="headerlink" title="5.代码优化"></a>5.代码优化</h2><p>一般是性能上的，例如，改变中间代码，变成更短的指令，更低的能耗</p>
+<p>例如，优化器直接把上面的序列转换成：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">t1 = id3 * 60.0</span><br><span class="line">id1 = id2 + t1</span><br></pre></td></tr></table></figure>
+
+<p>这个阶段是可选的。</p>
+<h1 id="6-代码生成"><a href="#6-代码生成" class="headerlink" title="6.代码生成"></a>6.代码生成</h1><p>这个就是后端的工作，前面的1~5都是编译器前端，前端任务是分析，后端任务是综合。</p>
+<p>这个阶段，代码生成器的输入是中间表示，输出是目标语言。</p>
+<p>如果目标语言是机器码，还得为每个变量选择寄存器、内存位置。<br>中间表示被翻译成机器指令序列。他们都能完成相同的任务。</p>
+<p>这里重要的是要如何合理分配寄存器、以及存放变量的值（即，决定了代码的存储分配）</p>
+<p>例如，使用R1、R2寄存器翻译成的机器代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">LEF     R2,     id3</span><br><span class="line">MULF    R2,     R2,     #60</span><br><span class="line">LDF     R1,     id2</span><br><span class="line">ADDF    R1,     R1,     R2</span><br><span class="line">STF     id1,    R1</span><br></pre></td></tr></table></figure>
+<h1 id="7-符号表管理"><a href="#7-符号表管理" class="headerlink" title="7.符号表管理"></a>7.符号表管理</h1><p>编译器的功能之一：记录源程序用到的变量名字、名字的各种属性信息</p>
+<p>属性提供了一个名字的存储分配、类型、作用域、参数类型和数量、传递方法（传值/引用）和返回类型</p>
+<p>符号表数据结构为每个变量名字，创建了一个记录条目。记录着命名的各个属性。</p>
+<p>编译器借助符号表，可以快速查找名字记录、读写数据。</p>
+<h1 id="回答问题"><a href="#回答问题" class="headerlink" title="回答问题"></a>回答问题</h1><h3 id><a href="#" class="headerlink" title></a></h3><ul>
+<li>编译器和解释器的区别？各自优点？<ul>
+<li>区别：解释器不通过翻译的方式生成目标程序。</li>
+<li>编译器：生成目标程序比解释器快</li>
+<li>解释器：错误诊断效果比编译器好</li>
+</ul>
+</li>
+<li>编译器成成汇编语言，而不是机器语言，好处是什么？<ul>
+<li>中间表示可以兼容多种指令架构</li>
+</ul>
+</li>
+<li>把一种高级语言翻译成另一种高级语言（简称：源到源 <code>source-to-source</code>）的翻译器，编译器使用C语言作为目标语言的好处是什么？<ul>
+<li>跟上面的问题类似</li>
+</ul>
+</li>
+<li>汇编器要完成的任务?<ul>
+<li>见文章</li>
+</ul>
+</li>
+<li>编译器的前端<code>front end</code>和后端<code>back end</code>是什么？<ul>
+<li>前端：分析</li>
+<li>后端：综合</li>
+</ul>
+</li>
+<li>编译器的各个步骤？分别干了什么？</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E7%BC%96%E8%AF%91%E5%99%A8/" rel="tag"># 编译器</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/27/%E5%88%A9%E7%94%A8Socket%E6%A8%A1%E6%8B%9F%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%AF%BB%E5%86%99%E6%95%B0%E6%8D%AE/" rel="next" title="利用Socket模拟服务器读写数据">
+                <i class="fa fa-chevron-left"></i> 利用Socket模拟服务器读写数据
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">YoU1024</p>
+              <p class="site-description motion-element" itemprop="description">命运对勇士说/暴风雨要来了/勇士低语/我就是暴风雨</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#几个问题："><span class="nav-number">1.</span> <span class="nav-text">几个问题：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#语言处理器"><span class="nav-number"></span> <span class="nav-text">语言处理器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一个编译器的结构"><span class="nav-number"></span> <span class="nav-text">一个编译器的结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-词法分析"><span class="nav-number"></span> <span class="nav-text">1.词法分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-语法分析"><span class="nav-number"></span> <span class="nav-text">2.语法分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-语义分析"><span class="nav-number"></span> <span class="nav-text">3.语义分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-中间代码生成"><span class="nav-number"></span> <span class="nav-text">4.中间代码生成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-代码优化"><span class="nav-number"></span> <span class="nav-text">5.代码优化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-代码生成"><span class="nav-number"></span> <span class="nav-text">6.代码生成</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-符号表管理"><span class="nav-number"></span> <span class="nav-text">7.符号表管理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#回答问题"><span class="nav-number"></span> <span class="nav-text">回答问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text"></span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">YoU1024</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
