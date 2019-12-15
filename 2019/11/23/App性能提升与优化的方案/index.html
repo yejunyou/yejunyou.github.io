@@ -79,19 +79,19 @@
 
 
 
-<meta name="description" content="屏幕上显示的内容，是由CPU和GPU一起协作完成的。">
+<meta name="description" content="屏幕上显示的内容，是由CPU和GPU一起协作完成的。 思考: 项目如何优化内存？从哪几方面着手？ 列表卡顿的原因？解决方案？   屏幕显示原理屏幕上显示的内容，是由CPU和GPU一起协作完成的。 CPU(Central Processing Unit，中央处理器)负责对象的创建和销毁、对象属性的调整、布局计算、文本计算和排版、图片的解码和格式转换、图像的绘制（Core Graphics）等工作。">
 <meta name="keywords" content="性能优化,卡顿监测">
 <meta property="og:type" content="article">
 <meta property="og:title" content="App性能提升与优化的方案">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;23&#x2F;App%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87%E4%B8%8E%E4%BC%98%E5%8C%96%E7%9A%84%E6%96%B9%E6%A1%88&#x2F;index.html">
 <meta property="og:site_name" content="you1024">
-<meta property="og:description" content="屏幕上显示的内容，是由CPU和GPU一起协作完成的。">
+<meta property="og:description" content="屏幕上显示的内容，是由CPU和GPU一起协作完成的。 思考: 项目如何优化内存？从哪几方面着手？ 列表卡顿的原因？解决方案？   屏幕显示原理屏幕上显示的内容，是由CPU和GPU一起协作完成的。 CPU(Central Processing Unit，中央处理器)负责对象的创建和销毁、对象属性的调整、布局计算、文本计算和排版、图片的解码和格式转换、图像的绘制（Core Graphics）等工作。">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;23&#x2F;App%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87%E4%B8%8E%E4%BC%98%E5%8C%96%E7%9A%84%E6%96%B9%E6%A1%88&#x2F;rendering.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;23&#x2F;App%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87%E4%B8%8E%E4%BC%98%E5%8C%96%E7%9A%84%E6%96%B9%E6%A1%88&#x2F;sync.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;23&#x2F;App%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87%E4%B8%8E%E4%BC%98%E5%8C%96%E7%9A%84%E6%96%B9%E6%A1%88&#x2F;%E5%8D%A1%E9%A1%BF%E5%8E%9F%E5%9B%A0%E7%AE%AD%E5%A4%B4%E5%9B%BE.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;23&#x2F;App%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87%E4%B8%8E%E4%BC%98%E5%8C%96%E7%9A%84%E6%96%B9%E6%A1%88&#x2F;runloop%E8%BF%90%E8%A1%8C%E9%80%BB%E8%BE%91.png">
-<meta property="og:updated_time" content="2019-12-01T13:30:37.537Z">
+<meta property="og:updated_time" content="2019-12-15T10:07:39.140Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;23&#x2F;App%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87%E4%B8%8E%E4%BC%98%E5%8C%96%E7%9A%84%E6%96%B9%E6%A1%88&#x2F;rendering.png">
 
@@ -304,7 +304,6 @@
 
       
         <p>屏幕上显示的内容，是由CPU和GPU一起协作完成的。</p>
-<a id="more"></a>
 <h1 id="思考"><a href="#思考" class="headerlink" title="思考:"></a>思考:</h1><ol>
 <li>项目如何优化内存？从哪几方面着手？</li>
 <li>列表卡顿的原因？解决方案？</li>

@@ -429,8 +429,17 @@
 
       
         
-          <p><img src="/2019/11/20/%E7%BB%84%E4%BB%B6%E5%8C%96%E4%BB%93%E5%BA%93%E6%90%AD%E5%BB%BA%E6%B5%81%E7%A8%8B/cocoapods.png" alt="组件化"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git lib create YYUtils</span><br></pre></td></tr></table></figure>
+          
+          
+1git lib create YYUtils
+
+创建使用私有pod库
+1. 确定私有库名称比如YYNetwork
+2. ⽣成模板⼯程到目标文件夹如
+1$ cd /work/workspace
+执⾏
+1$ pod lib create YYNetwork --template-url=http:/
+          ...
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/11/20/%E7%BB%84%E4%BB%B6%E5%8C%96%E4%BB%93%E5%BA%93%E6%90%AD%E5%BB%BA%E6%B5%81%E7%A8%8B/#more" rel="contents">
@@ -554,11 +563,19 @@
 
       
         
-          <p><img src="/2019/11/19/%E6%B1%87%E7%BC%96%E5%9F%BA%E7%A1%80-2/8086%E6%B1%87%E7%BC%96%E5%9F%BA%E7%A1%802.png" alt="汇编基础-2"></p>
-<h1 id="中断"><a href="#中断" class="headerlink" title="中断"></a>中断</h1><ul>
-<li>概念：<ul>
-<li>软件或者硬件的信号，使得CPU暂停当前任务，去执行另一段子程序</li>
-<li>本质是一种电信号，中断控制器把电信号发送给处理器的特定引脚，处理器暂停当前任务，跳转到中断处理程序的入口点处理中断</li></ul></li></ul>
+          
+          
+中断
+概念：
+软件或者硬件的信号，使得CPU暂停当前任务，去执行另一段子程序
+本质是一种电信号，中断控制器把电信号发送给处理器的特定引脚，处理器暂停当前任务，跳转到中断处理程序的入口点处理中断
+
+
+
+分类：
+硬中断（外中断）：外部设备触发（例如网卡收到数据包）
+软中断（内中断）：程序触发（例如执行
+          ...
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/11/19/%E6%B1%87%E7%BC%96%E5%9F%BA%E7%A1%80-2/#more" rel="contents">
@@ -682,8 +699,29 @@
 
       
         
-          <p><img src="/2019/11/19/%E6%B1%87%E7%BC%96%E5%9F%BA%E7%A1%80-1/8086%E6%B1%87%E7%BC%96%E5%9F%BA%E7%A1%801.png" alt="汇编基础"></p>
-<p>汇编的知识点比较杂且多，为方便梳理，整理成思维导图：</p>
+          
+          
+汇编的知识点比较杂且多，为方便梳理，整理成思维导图：
+
+
+语言发展
+机器语言
+汇编语言
+高级语言
+编译与反编译的关系
+特点
+
+
+直接访问、控制硬件
+和机器指令一一对应
+不区分大小写
+
+汇编分类
+8086
+AT&amp;T（Mac、iOS模拟器）
+ARM（切入式、iOS设备）
+Win32/Win64
+          ...
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/11/19/%E6%B1%87%E7%BC%96%E5%9F%BA%E7%A1%80-1/#more" rel="contents">

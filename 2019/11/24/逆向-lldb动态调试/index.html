@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="动态调试动态调试可以再程序运行起来以后，通过打断点、打印的方式，查看参数、返回值、函数调用流程">
+<meta name="description" content="动态调试动态调试可以再程序运行起来以后，通过打断点、打印的方式，查看参数、返回值、函数调用流程 其原理如下。  Xcode的编译器发展经历了从GCC到LLVM的历程，调试器经历了从GDB到LLDB的历程。目前我们接触的是Xcode的LLDB和手机里的debugserver。debugserver是一开始就存放在Xcode里面的，路径：Applications&#x2F;Xcode.app&#x2F;Contents&#x2F;">
 <meta name="keywords" content="逆向">
 <meta property="og:type" content="article">
 <meta property="og:title" content="逆向-lldb动态调试">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;24&#x2F;%E9%80%86%E5%90%91-lldb%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95&#x2F;index.html">
 <meta property="og:site_name" content="you1024">
-<meta property="og:description" content="动态调试动态调试可以再程序运行起来以后，通过打断点、打印的方式，查看参数、返回值、函数调用流程">
+<meta property="og:description" content="动态调试动态调试可以再程序运行起来以后，通过打断点、打印的方式，查看参数、返回值、函数调用流程 其原理如下。  Xcode的编译器发展经历了从GCC到LLVM的历程，调试器经历了从GDB到LLDB的历程。目前我们接触的是Xcode的LLDB和手机里的debugserver。debugserver是一开始就存放在Xcode里面的，路径：Applications&#x2F;Xcode.app&#x2F;Contents&#x2F;">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;24&#x2F;%E9%80%86%E5%90%91-lldb%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95&#x2F;xcodedebugserver.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;24&#x2F;%E9%80%86%E5%90%91-lldb%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95&#x2F;anydebugserver.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;24&#x2F;%E9%80%86%E5%90%91-lldb%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95&#x2F;serverlist.png">
-<meta property="og:updated_time" content="2019-11-24T07:34:23.208Z">
+<meta property="og:updated_time" content="2019-12-15T10:07:39.155Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;24&#x2F;%E9%80%86%E5%90%91-lldb%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95&#x2F;xcodedebugserver.png">
 
@@ -303,7 +303,6 @@
 
       
         <h1 id="动态调试"><a href="#动态调试" class="headerlink" title="动态调试"></a>动态调试</h1><p>动态调试可以再程序运行起来以后，通过打断点、打印的方式，查看参数、返回值、函数调用流程</p>
-<a id="more"></a>
 <p>其原理如下。</p>
 <p><img src="/2019/11/24/%E9%80%86%E5%90%91-lldb%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95/xcodedebugserver.png" alt></p>
 <p>Xcode的编译器发展经历了从GCC到LLVM的历程，调试器经历了从GDB到LLDB的历程。目前我们接触的是Xcode的LLDB和手机里的<code>debugserver</code>。<code>debugserver</code>是一开始就存放在Xcode里面的，路径：<code>Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/De viceSupport/9.1/DeveloperDiskImage.dmg/usr/bin/debugserver</code>。当Xcode识别出手机设备后，自动安装debugserver到手机里。这也意味着，只能调试通过Xcode安装的app。</p>
