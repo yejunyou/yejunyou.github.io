@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="block本质写一段block代码： 123456789101112int main(int argc, const char * argv[]) &amp;#123;    @autoreleasepool &amp;#123;        int age = 10;        void (^myBlock)(int, int) = ^(int a, int b)&amp;#123;            NSL">
+<meta name="description" content="本block系列解决下面几个问题：  block的原理？本质是什么？ __block 的作用？底层实现？使用注意事项？ block的属性修饰为何是copy？使用block有什么注意点？ block修改可变集合对象，需要添加___block麽？  block本质写一段block代码： 123456789101112int main(int argc, const char * argv[]) &amp;#1">
 <meta name="keywords" content="block">
 <meta property="og:type" content="article">
 <meta property="og:title" content="block本质探究1-布局结构">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;14&#x2F;block%E6%9C%AC%E8%B4%A8%E6%8E%A2%E7%A9%B61-%E5%B8%83%E5%B1%80%E7%BB%93%E6%9E%84&#x2F;index.html">
 <meta property="og:site_name" content="you1024">
-<meta property="og:description" content="block本质写一段block代码： 123456789101112int main(int argc, const char * argv[]) &amp;#123;    @autoreleasepool &amp;#123;        int age = 10;        void (^myBlock)(int, int) = ^(int a, int b)&amp;#123;            NSL">
+<meta property="og:description" content="本block系列解决下面几个问题：  block的原理？本质是什么？ __block 的作用？底层实现？使用注意事项？ block的属性修饰为何是copy？使用block有什么注意点？ block修改可变集合对象，需要添加___block麽？  block本质写一段block代码： 123456789101112int main(int argc, const char * argv[]) &amp;#1">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;14&#x2F;block%E6%9C%AC%E8%B4%A8%E6%8E%A2%E7%A9%B61-%E5%B8%83%E5%B1%80%E7%BB%93%E6%9E%84&#x2F;block_layout_1.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;14&#x2F;block%E6%9C%AC%E8%B4%A8%E6%8E%A2%E7%A9%B61-%E5%B8%83%E5%B1%80%E7%BB%93%E6%9E%84&#x2F;block_layout_2.png">
-<meta property="og:updated_time" content="2019-12-15T01:05:45.433Z">
+<meta property="og:updated_time" content="2019-12-15T10:03:17.071Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;14&#x2F;block%E6%9C%AC%E8%B4%A8%E6%8E%A2%E7%A9%B61-%E5%B8%83%E5%B1%80%E7%BB%93%E6%9E%84&#x2F;block_layout_1.png">
 
@@ -301,7 +301,14 @@
       
 
       
-        <h2 id="block本质"><a href="#block本质" class="headerlink" title="block本质"></a>block本质</h2><p>写一段block代码：</p>
+        <p>本block系列解决下面几个问题：</p>
+<ol>
+<li>block的原理？本质是什么？</li>
+<li>__block 的作用？底层实现？使用注意事项？</li>
+<li>block的属性修饰为何是copy？使用block有什么注意点？</li>
+<li>block修改可变集合对象，需要添加___block麽？</li>
+</ol>
+<h2 id="block本质"><a href="#block本质" class="headerlink" title="block本质"></a>block本质</h2><p>写一段block代码：</p>
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> main(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[]) &#123;</span><br><span class="line">    <span class="keyword">@autoreleasepool</span> &#123;</span><br><span class="line">        <span class="keyword">int</span> age = <span class="number">10</span>;</span><br><span class="line">        <span class="keyword">void</span> (^myBlock)(<span class="keyword">int</span>, <span class="keyword">int</span>) = ^(<span class="keyword">int</span> a, <span class="keyword">int</span> b)&#123;</span><br><span class="line">            <span class="built_in">NSLog</span>(<span class="string">@"myblock print a = %d, b = %d"</span>,a,b);</span><br><span class="line">            <span class="built_in">NSLog</span>(<span class="string">@"myblock print age = %d"</span>,age);</span><br><span class="line">        &#125;;</span><br><span class="line">        </span><br><span class="line">        myBlock(<span class="number">20</span>,<span class="number">30</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>使用命令行转换成c++代码：</p>
@@ -471,7 +478,7 @@
               
                 <a href="/archives/%20%7C%7C%20archive">
               
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

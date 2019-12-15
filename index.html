@@ -231,6 +231,135 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/15/block%E6%9C%AC%E8%B4%A8%E6%8E%A2%E7%A9%B64-weak%E5%92%8C-block/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YoU1024">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="you1024">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/12/15/block%E6%9C%AC%E8%B4%A8%E6%8E%A2%E7%A9%B64-weak%E5%92%8C-block/" itemprop="url">block本质探究4-weak和-block</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-12-15T17:56:36+08:00">
+                2019-12-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          block本质探究2-变量捕获里讨论的变量都是基本数据类型，本篇探讨对象类型的捕获。由于捕获过程中涉及block类型的转换，如果不熟悉她们的转换，可以先看看block本质探究3-block类型
+block捕获对象实际使用block一般是捕获对象。被捕获的对象什么时候释放、销毁？
+往下看：
+12345
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/12/15/block%E6%9C%AC%E8%B4%A8%E6%8E%A2%E7%A9%B64-weak%E5%92%8C-block/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/14/block%E6%9C%AC%E8%B4%A8%E6%8E%A2%E7%A9%B63-block%E7%B1%BB%E5%9E%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -565,8 +694,15 @@ auto变量
       
         
           
-          block本质写一段block代码：
-123456789101112int main(int argc, const char * argv[]) &#123;    @autoreleasepool &#123;        int age = 10;        void (^myBlock
+          本block系列解决下面几个问题：
+
+block的原理？本质是什么？
+__block 的作用？底层实现？使用注意事项？
+block的属性修饰为何是copy？使用block有什么注意点？
+block修改可变集合对象，需要添加___block麽？
+
+block本质写一段block代码：
+12345678
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1392,134 +1528,6 @@ IP地址（网络上主机设备的
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/23/%E7%BB%84%E4%BB%B6%E5%8C%96-iOS%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1%E6%96%B9%E6%A1%88/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="YoU1024">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="you1024">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/11/23/%E7%BB%84%E4%BB%B6%E5%8C%96-iOS%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1%E6%96%B9%E6%A1%88/" itemprop="url">组件化-iOS组件通信方案</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-23T17:34:36+08:00">
-                2019-11-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          业务模块化架构设计，可以达到明确模块职责及边界，提升代码质量，减少复杂依赖，优化编译速度，提升开发效率等效果
-设计模式 vs 架构设计App 架构设计更多强调的是分层，基于设计模式六大原则之一的单一职责原则，将系统划分为基础层，网络层，UI层等等，以便于维护和扩展.
-设计模式的范畴比架构设计小，强调
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/11/23/%E7%BB%84%E4%BB%B6%E5%8C%96-iOS%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1%E6%96%B9%E6%A1%88/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1570,7 +1578,7 @@ IP地址（网络上主机设备的
               
                 <a href="/archives/%20%7C%7C%20archive">
               
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
