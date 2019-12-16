@@ -302,7 +302,7 @@
       
         
           
-          block本质探究2-变量捕获里讨论的变量都是基本数据类型，本篇探讨对象类型的捕获。由于捕获过程中涉及block类型的转换，如果不熟悉她们的转换，可以先看看block本质探究3-block类型
+          block本质探究2-变量捕获里讨论的变量都是基本数据类型，本篇探讨对象类型的捕获。由于捕获过程中涉及block类型的转换，如果不熟悉它们的转换，可以先看看block本质探究3-block类型
 block捕获对象实际使用block一般是捕获对象。被捕获的对象什么时候释放、销毁？
 往下看：
 12345
@@ -431,8 +431,8 @@ block捕获对象实际使用block一般是捕获对象。被捕获的对象什�
       
         
           
-          直接上代码：下面代码会打印什么
-1234567891011121314151617int main(int argc, const char * argv[]) &#123;    @autoreleasepool &#123;        void (^block)(void) = ^&#123
+          下面代码会打印什么：
+1234567891011121314151617int main(int argc, const char * argv[]) &#123;    @autoreleasepool &#123;        void (^block)(void) = ^&#123;    
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -568,7 +568,8 @@ static变量
 
 局部变量block的变量捕获机制能够保证block内部正常访问外部的变量
 auto变量
-上面的age就是auto自动变量。离开当前作用域就会销毁。为了保证block内部能够正常访问age，block内部专门新增加一个参数用于储存变量
+auto变量就是局部变量，zuto关键字也只修饰局部变量，离开当前作用域就会销毁。
+为了保证block内部能够正常访问age，block内部专门
           ...
           <!--noindex-->
           <div class="post-button text-center">
