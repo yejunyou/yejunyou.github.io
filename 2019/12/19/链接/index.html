@@ -94,7 +94,7 @@
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;19&#x2F;%E9%93%BE%E6%8E%A5&#x2F;715.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;19&#x2F;%E9%93%BE%E6%8E%A5&#x2F;716.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;19&#x2F;%E9%93%BE%E6%8E%A5&#x2F;7161.png">
-<meta property="og:updated_time" content="2019-12-19T12:08:48.065Z">
+<meta property="og:updated_time" content="2019-12-19T12:13:09.819Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;19&#x2F;%E9%93%BE%E6%8E%A5&#x2F;72.png">
 
@@ -339,12 +339,9 @@
 <p>例如：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.c</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sum</span><span class="params">(<span class="keyword">int</span> *a, <span class="keyword">int</span> n)</span></span>;</span><br><span class="line"><span class="keyword">int</span> <span class="built_in">array</span>[<span class="number">2</span>] = &#123;<span class="number">1</span>, <span class="number">2</span>&#125;;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123; <span class="keyword">return</span> sum(<span class="built_in">array</span>, <span class="number">2</span>);&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// sum.c</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sum</span><span class="params">(<span class="keyword">int</span> *a, <span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> s = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt; n; ++i)&#123;</span><br><span class="line">        s += a[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> s;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>这是一个静态链接。连接器把<code>RTF</code>组合，最终形成一个可行执行目标文件prog。</p>
 <p>操作：</p>
 <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ gcc -Og -o prog main<span class="selector-class">.c</span> sum<span class="selector-class">.c</span></span><br></pre></td></tr></table></figure>
-
-
-
+<p>这是一个静态链接。输出是一个可行执行目标文件prog。</p>
 </li>
 </ul>
 <p>  中间经过各种xx器的处理，输入输出文件如图：</p>
